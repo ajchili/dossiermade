@@ -1,31 +1,38 @@
 nav {
     width: 100%;
-    height: 7.25vh;
-    position: fixed;
-    z-index: 200;
+    position: relative;
 }
 
 #lander {
-    padding-top: 7.25vh;
+    height: 100vh;
 }
 
 #lander > #contents {
+    width: 100%;
+    height: 100%;
+    display: table;
     position: relative;
-    padding-top: 15vh;
 }
 
-#lander > #contents > #buttons {
+#lander > #contents > div {
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#lander > #contents > div > #buttons {
     margin-left: 25%;
     margin-right: 25%;
 }
 
-#lander > #contents > #buttons > p > button {
+#lander > #contents > div > #buttons > p > button {
     margin-left: 5%;
     margin-right: 5%;
 }
 
 #lander > div > video {
     min-width: 100%;
+    min-height: 100%;
     object-fit: fill;
     position: fixed;
     z-index: '-1';
@@ -33,7 +40,6 @@ nav {
 
 #content {
     position: relative;
-    margin-top: 20vh;
     padding-bottom: 7.5vh;
 }
 
