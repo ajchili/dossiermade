@@ -8,42 +8,7 @@
     <title>Dossier Made</title>
 
     <link rel="stylesheet" type="text/css" href="css/uikit.min.css">
-
-    <style>
-        nav {
-            width: 100%;
-            height: 7.25vh;
-            position: fixed;
-            z-index: 200;
-        }
-
-        #lander {
-            padding-top: 7.25vh;
-        }
-
-        #lander>#contents {
-            position: relative;
-            padding-top: 15vh;
-        }
-
-        #lander>#background_video {
-            width: 100%;
-            height: 100%;
-            position: fixed;
-        }
-
-        #lander>div>video {
-            min-width: 100%;
-            min-height: 100%;
-            object-fit: fill;
-            z-index: '-1';
-        }
-
-        #lander>#content_1 {
-            position: relative;
-            margin-top: 20vh;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/dossier.css">
 </head>
 
 <body>
@@ -53,7 +18,7 @@
                 <a class="uk-navbar-item uk-logo" href="http://dossiermade.com">DOSSIER MADE</a>
                 <ul class="uk-navbar-nav">
                     <li>
-                        <a class="uk-link-reset">Professional Videograhpy</a>
+                        <a class="uk-link-reset">Professional Videography</a>
                     </li>
                 </ul>
             </div>
@@ -67,16 +32,64 @@
             </div>
             <div id="contents" class="uk-light">
                 <p class="uk-h1 uk-text-center">DOSSIER MADE MEDIA</p>
-                <p class="uk-text-center" uk-margin><button class="uk-button uk-button-default uk-button-large">our work</button><button class="uk-button uk-button-default uk-button-large" style="margin-left: 20%;">contact us</button></p>
+                <div id="buttons">
+                    <p class="uk-text-center" uk-margin><button class="uk-button uk-button-default uk-button-large">our work</button><button class="uk-button uk-button-default uk-button-large" type=button onclick="scrollTo($('#contact'));">contact us</button></p>
+                </div>
             </div>
+        </div>
 
-            <div id="content_1" class="uk-background-muted" style="height: 100vh;">
+        <div id="content" class="uk-background-muted">
+            <div id="goal">
+                <div class="uk-child-width-1-1" uk-grid>
+                    <div>
+                        <div class="uk-card uk-card-default uk-card-hover uk-card-large uk-card-body">
+                            <h3 class="uk-card-title">OUR GOAL</h3>
+                            <p>Our vision is to construct a showcase for anyone who’s desire is to display what they want, when they want, wherever they want. Currently, we are dedicated to the automotive performance and aesthetic communities, with room to venture into many different avenues and fields of interest.<br><br>We have the equipment and experience to forge visuals that match and exceed your vision, allowing you to be the producer of your imagination. With our keen eye for detail, it is our calling to make sure you receive what you need.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="work">
+                <div class="uk-child-width-1-1" uk-grid>
+                    <div>
+                        <div class="uk-card uk-card-default uk-card-hover uk-card-large uk-card-body">
+                            <h3 class="uk-card-title">OUR WORK</h3>
+                            <p>Nothing because we haven't done anything.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="contact" class="uk-background-secondary">
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-card-large uk-card-body">
+                    <div class="uk-column-1-2">
+                        <div>
+                            <div class="uk-card uk-card-large uk-card-body">
+                                <h3 class="uk-card-title">Elijah Cutler</h3>
+                                <p>
+                                    <a href="mailto:elijah@dossiermade.com" class="uk-link-reset"><button class="uk-button uk-button-text">elijah@dossiermade.com</button></a>
+                                </p>
+                            </div>
+                            <div>
+                                <div class="uk-card uk-card-large uk-card-body">
+                                    <h3 class="uk-card-title">Kirin Patel</h3>
+                                    <p>
+                                        <a href="mailto:kirin@dossiermade.com" class="uk-link-reset"><button class="uk-button uk-button-text">kirin@dossiermade.com</button></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="js/uikit.min.js"></script>
+    <script src="js/dossier.js"></script>
 </body>
 
 </html>
