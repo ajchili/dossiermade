@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Dossier Made</title>
+
+    <link rel="stylesheet" type="text/css" href="css/uikit.min.css">
+
+    <style>
+        nav {
+            width: 100%;
+            height: 7.25vh;
+            position: fixed;
+            z-index: 200;
+        }
+
+        #lander {
+            padding-top: 7.25vh;
+        }
+
+        #lander>#contents {
+            position: relative;
+            padding-top: 15vh;
+        }
+
+        #lander>#background_video {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+        }
+
+        #lander>div>video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: fill;
+            z-index: '-1';
+        }
+
+        #lander>#content_1 {
+            position: relative;
+            margin-top: 20vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="desktop" class="uk-visible@m">
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-left uk-background-secondary uk-light">
+                <a class="uk-navbar-item uk-logo" href="http://dossiermade.com">Dossier Made</a>
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a class="uk-link-reset">Professional Videograhpy</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="lander">
+            <div id="background_video">
+                <video muted autoplay loop align="middle">
+                    <source src="media/background.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="contents" class="uk-light">
+                <p class="uk-h1 uk-text-center">Dossier Made</p>
+                <p class="uk-text-center" uk-margin><button class="uk-button uk-button-default uk-button-large">our work</button><button class="uk-button uk-button-default uk-button-large" style="margin-left: 20%;">contact</button></p>
+            </div>
+
+            <div id="content_1" class="uk-background-muted" style="height: 100vh;">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="js/uikit.min.js"></script>
+</body>
+
+</html>
