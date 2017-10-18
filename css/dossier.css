@@ -61,3 +61,26 @@ nav {
     padding-top: 7.5vh;
     padding-bottom: 7.5vh;
 }
+
+#project {
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#project_row {
+    padding-top: 3.5vh;
+}
+
+#project_showcase {
+    width: 50%;
+    height: 50vh;
+}
+
+#project_showcase > iframe {
+    width: 200%;
+    height: 100%;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
