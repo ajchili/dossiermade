@@ -23,19 +23,28 @@
                 <div>
                     <p class="uk-h1 uk-text-center">DOSSIER MADE MEDIA</p>
                     <div id="buttons">
-                        <p class="uk-text-center" uk-margin><a href="#work" uk-scroll><button class="uk-button uk-button-default uk-button-large">our work</button></a><a href="#contact" uk-scroll><button class="uk-button uk-button-default uk-button-large" type=button>contact us</button></a></p>
+                        <p class="uk-text-center" uk-margin><a href="#work" uk-scroll><button class="uk-button uk-button-default uk-button-large">our work</button></a><a href="#contact" uk-scroll><button class="uk-activeuk-button uk-button-default uk-button-large" type=button>contact us</button></a></p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
-            <nav class="uk-navbar-container" uk-navbar>
-                <div class="uk-navbar-left uk-width-1-1 uk-background-secondary uk-light">
-                    <a class="uk-navbar-item uk-logo" href="http://dossiermade.com">DOSSIER MADE</a>
-                    <ul class="uk-navbar-nav">
+        <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky;">
+            <nav class="uk-navbar-container uk-navbar-secondary uk-light" uk-navbar>
+                <div class="uk-navbar-left uk-width-1-1 uk-background-secondary">
+                    <a href="#lander" class="uk-navbar-item uk-logo" uk-scroll>DOSSIER MADE</a>
+                    <ul class="uk-navbar-nav" uk-scrollspy-nav="closest: li; scroll: true">
                         <li>
-                            <a class="uk-link-reset">Professional Videography</a>
+                            <a href="#goal" uk-scroll>ABOUT</a>
+                        </li>
+                        <li>
+                            <a href="#work" uk-scroll>WORK</a>
+                        </li>
+                        <li>
+                            <a href="#services" uk-scroll>SERVICES</a>
+                        </li>
+                        <li>
+                            <a href="#contact" uk-scroll>CONTACT</a>
                         </li>
                     </ul>
                 </div>
@@ -44,19 +53,21 @@
 
         <div id="content" class="uk-background-muted">
             <div id="goal">
-                <div class="uk-child-width-1-1">
-                    <div>
-                        <div class="uk-card uk-card-muted uk-card-hover uk-card-large uk-card-body">
-                            <p class="uk-h1">OUR GOAL</p>
-                            <p>Our vision is to construct a showcase for anyone who’s desire is to display what they want, when they want, wherever they want. Currently, we are dedicated to the automotive performance and aesthetic communities, with room to venture into many different avenues and fields of interest.<br><br>We have the equipment and experience to forge visuals that match and exceed your vision, allowing you to be the producer of your imagination. With our keen eye for detail, it is our calling to make sure you receive what you need.</p>
-                        </div>
+                <div class="uk-child-width-1-2" uk-grid>
+                    <div class="uk-card uk-card-hover uk-card-body">
+                        <p class="uk-h1">ABOUT US</p>
+                        <p>Dossier Made is based between Baltimore, Maryland, and Washington D.C., floating around the DMV area. We have the resources to expand from metropolitan Philidelphia to Southern Virginia. ARrangements can also be made to travel further along the east coast and to other North American Locations.</p>
+                    </div>
+                    <div class="uk-card uk-card-hover uk-card-body">
+                        <p class="uk-h1">OUR VISION</p>
+                        <p>To construct a showcase for anyone who’s desire is to display what they want, when they want, wherever they want. Currently, we are dedicated to the automotive performance and aesthetic communities, with room to venture into many different avenues and fields of interest.<br><br>We have the equipment and experience to forge visuals that match and exceed your vision, allowing you to be the producer of your imagination. With our keen eye for detail, it is our calling to make sure you receive what you need.</p>
                     </div>
                 </div>
             </div>
             <div id="work">
                 <div class="uk-child-width-1-1">
                     <div>
-                        <div class="uk-card uk-card-muted uk-card-hover uk-card-large uk-card-body">
+                        <div class="uk-card uk-card-muted uk-card-hover uk-card-body">
                             <p class="uk-h1">OUR WORK</p>
                             <div class="uk-light">
                                 <div id="project_row" class="uk-column-1-2">
@@ -99,7 +110,7 @@
             <div id="services">
                 <div class="uk-child-width-1-1">
                     <div>
-                        <div class="uk-card uk-card-muted uk-card-hover uk-card-large uk-card-body">
+                        <div class="uk-card uk-card-muted uk-card-hover uk-card-body">
                             <p class="uk-h1">OUR SERVICES</p>
                             <p>Videography for:</p>
                             <ul>
@@ -124,11 +135,11 @@
 
         <div id="contact" class="uk-background-secondary">
             <div>
-                <div class="uk-card uk-card-default uk-card-hover uk-card-large uk-card-body">
+                <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                     <p class="uk-h1">CONTACT US</p>
                     <div class="uk-column-1-2">
                         <div>
-                            <div class="uk-card uk-card-large uk-card-hover uk-card-body">
+                            <div class="uk-card uk-card-small uk-card-hover uk-card-body">
                                 <p class="uk-card-title">Elijah Cutler</p>
                                 <p class="uk-text-meta">Design & Marketing</p>
                                 <p class="uk-text-meta">
@@ -136,7 +147,7 @@
                                     <a href="tel:1-410-709-8228" class="uk-link-reset"><button class="uk-button uk-button-text">(410)-709-8226</button></a>
                                 </p>
                             </div>
-                            <div class="uk-card uk-card-large uk-card-hover uk-card-body">
+                            <div class="uk-card uk-card-small uk-card-hover uk-card-body">
                                 <p class="uk-card-title">Kirin Patel</p>
                                 <p class="uk-text-meta">Videography & Developer</p>
                                 <p class="uk-text-meta">

@@ -39,6 +39,10 @@ nav {
     z-index: '-1';
 }
 
+#goal {
+    padding-left: 2.5%;
+}
+
 #content {
     position: relative;
     padding-bottom: 7.5vh;
