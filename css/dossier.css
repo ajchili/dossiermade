@@ -64,12 +64,22 @@
     padding-top: 7.5vh;
 }
 
-
 #contact {
     position: relative;
 }
 
 #contact > div {
+    margin-left: 15%;
+    margin-right: 15%;
+    padding-top: 7.5vh;
+    padding-bottom: 7.5vh;
+}
+
+#mobile_contact {
+    position: relative;
+}
+
+#mobile_contact > div {
     margin-left: 15%;
     margin-right: 15%;
     padding-top: 7.5vh;
