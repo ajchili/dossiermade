@@ -26,9 +26,19 @@
     margin-right: 25%;
 }
 
+#lander > #contents > #mobile > #buttons {
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
 #lander > #contents > div > #buttons > p > a {
     margin-left: 5%;
     margin-right: 5%;
+}
+
+#lander > #contents > #mobile > #buttons > p > a {
+    margin-left: 1%;
+    margin-right: 1%;
 }
 
 #lander > div > video {
