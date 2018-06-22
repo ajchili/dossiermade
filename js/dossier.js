@@ -4,5 +4,5 @@ $('.modal').on('hide', function () {
 });
 
 if ($('#desktop').is(':visible')) {
-    $('#background_video').html('<video muted autoplay loop align="center"><source src="media/background.mp4" type="video/mp4"></video>');
+    $('#background_video').html('<video muted autoplay loop align="center"><source src="media/lazysaturday.mp4" type="video/mp4"></video>');
 }
