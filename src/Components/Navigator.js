@@ -8,6 +8,7 @@ import {
 import firebase from "./firebase";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
+import AdminDashboard from "../Pages/AdminDashboard";
 
 class Navigator extends Component {
   state = {
@@ -26,6 +27,8 @@ class Navigator extends Component {
 
     const redirectingAuthenticationRoute = Component =>
       user ? <Redirect to="/dashboard" /> : <Component />;
+    const authenticatedRoute = Component =>
+      user ? <Component /> : <Redirect to="/login" />;
 
     return (
       <Router>
@@ -36,6 +39,13 @@ class Navigator extends Component {
               path="/login"
               exact
               render={() => redirectingAuthenticationRoute(Login)}
+            />
+          )}
+          {checkedAuthentication && (
+            <Route
+              path="/dashboard"
+              exact
+              render={() => authenticatedRoute(AdminDashboard)}
             />
           )}
         </Switch>
