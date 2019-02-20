@@ -13,6 +13,4 @@ class Home extends Component {
   }
 }
 
-const styles = {};
-
 export default Home;

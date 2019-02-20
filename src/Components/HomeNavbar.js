@@ -98,6 +98,4 @@ class HomeNavbar extends Component {
   }
 }
 
-const styles = {};
-
 export default HomeNavbar;
