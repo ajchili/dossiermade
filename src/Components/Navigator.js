@@ -24,9 +24,7 @@ class Navigator extends Component {
 
   render() {
     const { checkedAuthentication, user } = this.state;
-
-    const redirectingAuthenticationRoute = Component =>
-      user ? <Redirect to="/dashboard" /> : <Component />;
+    
     const authenticatedRoute = Component =>
       user ? <Component /> : <Redirect to="/login" />;
 
@@ -34,13 +32,7 @@ class Navigator extends Component {
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />
-          {checkedAuthentication && (
-            <Route
-              path="/login"
-              exact
-              render={() => redirectingAuthenticationRoute(Login)}
-            />
-          )}
+          <Route path="/login" exact component={Login} />
           {checkedAuthentication && (
             <Route
               path="/dashboard"

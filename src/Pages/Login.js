@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import firebase, { provider } from "../Components/firebase";
+import firebase, { provider, validateUserPermissions } from "../Components/firebase";
 
 class Login extends Component {
   _googleSignIn = () => {
@@ -8,18 +8,12 @@ class Login extends Component {
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(async result => {
-        const { user } = result;
+      .then(async () => {
         try {
-          let documentSnapshot = await firebase
-            .firestore()
-            .collection("users")
-            .doc(user.uid)
-            .get();
-          if (documentSnapshot.exists && documentSnapshot.data().admin) {
+          let valid = await validateUserPermissions();
+          if (valid) {
             history.push("/dashboard");
           } else {
-            firebase.auth().signOut();
             alert("Insufficient Permissions");
             history.push("/");
           }
@@ -49,10 +43,7 @@ class Login extends Component {
             </button>
             <br />
             <br />
-            <button
-              onClick={this._goBack}
-              className="uk-button uk-button-text"
-            >
+            <button onClick={this._goBack} className="uk-button uk-button-text">
               BACK
             </button>
           </div>

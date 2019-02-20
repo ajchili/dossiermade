@@ -1,8 +1,18 @@
 import React, { Component } from "react";
-import firebase from "../Components/firebase";
+import { withRouter } from "react-router-dom";
+import { validateUserPermissions } from "../Components/firebase";
 import Navbar from "../Components/AdminDashboardNavbar";
 
 class AdminDashboard extends Component {
+  async componentDidMount() {
+    const { history } = this.props;
+    let valid = await validateUserPermissions();
+    if (!valid) {
+      alert("Insufficient Permissions");
+      history.push("/");
+    }
+  }
+
   render() {
     return (
       <div>
@@ -12,4 +22,4 @@ class AdminDashboard extends Component {
   }
 }
 
-export default AdminDashboard;
+export default withRouter(AdminDashboard);

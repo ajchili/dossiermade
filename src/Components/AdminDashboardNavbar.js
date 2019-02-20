@@ -17,7 +17,7 @@ class AdminDashboardNavbar extends Component {
             </Link>
           </div>
           <div className="uk-navbar-right">
-            <ul class="uk-navbar-nav">
+            <ul className="uk-navbar-nav">
               <li>
                 <a href="#logout" onClick={this._logout}>
                   Logout

@@ -15,3 +15,28 @@ const app = firebase.initializeApp(config);
 
 export default app;
 export const provider = new firebase.auth.GoogleAuthProvider();
+export async function validateUserPermissions() {
+  const user = app.auth().currentUser;
+  if (user) {
+    try {
+      let documentSnapshot = await app
+        .firestore()
+        .collection("users")
+        .doc(user.uid)
+        .get();
+      if (
+        documentSnapshot.exists &&
+        documentSnapshot.data() &&
+        documentSnapshot.data().admin
+      ) {
+        return true;
+      } else {
+        app.auth().signOut();
+        return false;
+      }
+    } catch (err) {
+      app.auth().signOut();
+      return false;
+    }
+  }
+}
