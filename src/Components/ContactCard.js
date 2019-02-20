@@ -27,7 +27,6 @@ class ContactCard extends Component {
         .collection("contact-information")
         .get();
       let people = querySnapshot.docs.map(doc => doc.data());
-      console.log(people);
       this.setState({ people });
     } catch (err) {
       // Do nothing on error

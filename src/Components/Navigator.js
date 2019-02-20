@@ -9,6 +9,7 @@ import firebase from "./firebase";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import AdminDashboard from "../Pages/AdminDashboard";
+import EditContactInformation from "../Pages/EditContactInformation";
 
 class Navigator extends Component {
   state = {
@@ -38,6 +39,13 @@ class Navigator extends Component {
               path="/dashboard"
               exact
               render={() => authenticatedRoute(AdminDashboard)}
+            />
+          )}
+          {checkedAuthentication && (
+            <Route
+              path="/dashboard/edit/contact-information"
+              exact
+              render={() => authenticatedRoute(EditContactInformation)}
             />
           )}
         </Switch>
