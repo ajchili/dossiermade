@@ -30,6 +30,11 @@ class Login extends Component {
       .catch(() => alert("An unexpected error occurred."));
   };
 
+  _goBack = () => {
+    const { history } = this.props;
+    history.push("/");
+  };
+
   render() {
     return (
       <div style={styles.fill}>
@@ -41,6 +46,14 @@ class Login extends Component {
               className="uk-button uk-button-danger"
             >
               LOGIN
+            </button>
+            <br />
+            <br />
+            <button
+              onClick={this._goBack}
+              className="uk-button uk-button-text"
+            >
+              BACK
             </button>
           </div>
         </div>
