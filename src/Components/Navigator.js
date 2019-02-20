@@ -1,9 +1,16 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "../Pages/Home";
 
 class Navigator extends Component {
   render() {
-    return <Router />;
+    return (
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Home} />
+        </Switch>
+      </Router>
+    );
   }
 }
 
