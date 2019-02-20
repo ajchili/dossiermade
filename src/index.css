@@ -1,3 +1,7 @@
+.invert {
+  mix-blend-mode: difference
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
