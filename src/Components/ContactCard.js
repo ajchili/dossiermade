@@ -1,21 +1,41 @@
 import React, { Component } from "react";
+import firebase from "./firebase";
 import Card from "./Card";
 
-const people = [
-  {
-    name: "Elijah Cutler",
-    email: "elijah@dossiermade.com",
-    phone: "410-402-3011"
-  },
+const staticPeople = [
   {
     name: "Kirin Patel",
     email: "kirin@dossiermade.com",
     phone: "301-641-5838"
+  },
+  {
+    name: "Elijah Cutler",
+    email: "elijah@dossiermade.com",
+    phone: "410-402-3011"
   }
 ];
 
 class ContactCard extends Component {
+  state = {
+    people: staticPeople
+  };
+
+  async componentDidMount() {
+    try {
+      let querySnapshot = await firebase
+        .firestore()
+        .collection("contact-information")
+        .get();
+      let people = querySnapshot.docs.map(doc => doc.data());
+      console.log(people);
+      this.setState({ people });
+    } catch (err) {
+      // Do nothing on error
+    }
+  }
+
   render() {
+    const { people } = this.state;
     return (
       <Card
         title="CONTACT US"
