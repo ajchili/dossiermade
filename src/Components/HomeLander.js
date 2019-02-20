@@ -12,7 +12,7 @@ class HomeLander extends Component {
           <div style={styles.landerContentItems}>
             <p className="uk-h1 uk-text-center">DOSSIER MADE MEDIA</p>
             <div className="uk-text-center">
-              <a href="#work">
+              <a href="#work" uk-scroll="true">
                 <button
                   className="uk-button uk-button-default uk-button-large uk-margin-right"
                   type="button"
@@ -20,7 +20,7 @@ class HomeLander extends Component {
                   our work
                 </button>
               </a>
-              <a href="#contact">
+              <a href="#contact" uk-scroll="true">
                 <button
                   className="uk-button uk-button-default uk-button-large uk-margin-left"
                   type="button"
