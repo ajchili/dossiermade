@@ -12,8 +12,8 @@ class Home extends Component {
       <div>
         <Lander id="lander" />
         <Navbar />
-        <ContentContainer id="about" />
         <ContentContainer id="work" cardContent={<WorkCard />} />
+        <ContentContainer id="about" />
         <ContentContainer id="services" cardContent={<ServicesCard />} />
         <ContentContainer
           id="contact"

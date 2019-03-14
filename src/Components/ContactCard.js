@@ -5,7 +5,7 @@ import Card from "./Card";
 const staticPeople = [
   {
     name: "Kirin Patel",
-    email: "kirin@dossiermade.com",
+    email: "info@dossiermade.com",
     phone: "301-641-5838"
   },
   {
