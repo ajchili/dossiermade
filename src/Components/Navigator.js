@@ -8,8 +8,8 @@ import {
 import firebase from "./firebase";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
-import AdminDashboard from "../Pages/AdminDashboard";
-import EditContactInformation from "../Pages/EditContactInformation";
+import AdminDashboard from "../Pages/Admin/Home";
+import AdminContactInformation from "../Pages/Admin/ContactInformation";
 
 class Navigator extends Component {
   state = {
@@ -25,14 +25,13 @@ class Navigator extends Component {
 
   render() {
     const { checkedAuthentication, user } = this.state;
-    
+
     const authenticatedRoute = Component =>
       user ? <Component /> : <Redirect to="/login" />;
 
     return (
       <Router>
         <Switch>
-          <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
           {checkedAuthentication && (
             <Route
@@ -43,11 +42,12 @@ class Navigator extends Component {
           )}
           {checkedAuthentication && (
             <Route
-              path="/dashboard/edit/contact-information"
+              path="/dashboard/contact"
               exact
-              render={() => authenticatedRoute(EditContactInformation)}
+              render={() => authenticatedRoute(AdminContactInformation)}
             />
           )}
+          <Route path="/" component={Home} />
         </Switch>
       </Router>
     );
