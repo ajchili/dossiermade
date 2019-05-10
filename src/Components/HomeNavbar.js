@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 const links = [
-  { name: "ABOUT", url: "about" },
   { name: "WORK", url: "work" },
+  { name: "ABOUT", url: "about" },
   { name: "SERVICES", url: "services" },
   { name: "CONTACT", url: "contact" }
 ];

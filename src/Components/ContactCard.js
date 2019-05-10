@@ -10,7 +10,7 @@ const staticPeople = [
   },
   {
     name: "Elijah Cutler",
-    email: "elijah@dossiermade.com",
+    email: "info@dossiermade.com",
     phone: "410-402-3011"
   }
 ];
