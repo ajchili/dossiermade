@@ -27,12 +27,11 @@ export async function validateUserPermissions() {
       if (
         documentSnapshot.exists &&
         documentSnapshot.data() &&
-        documentSnapshot.data().admin
+        documentSnapshot.data().admin === true
       ) {
         return true;
       } else {
-        app.auth().signOut();
-        return false;
+        throw new Error("Insufficient Permissions!");
       }
     } catch (err) {
       app.auth().signOut();
