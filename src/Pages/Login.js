@@ -6,12 +6,21 @@ import firebase, {
 } from "../Components/firebase";
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasCheckedAuthentication: false
+    };
+  }
+
   componentDidMount() {
     const { history } = this.props;
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
+      const { hasCheckedAuthentication } = this.state;
+      if (!hasCheckedAuthentication && user) {
         history.push("/dashboard");
       }
+      this.setState({ hasCheckedAuthentication: true });
     });
   }
 
