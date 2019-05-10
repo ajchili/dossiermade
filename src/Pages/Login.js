@@ -1,8 +1,20 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import firebase, { provider, validateUserPermissions } from "../Components/firebase";
+import firebase, {
+  provider,
+  validateUserPermissions
+} from "../Components/firebase";
 
 class Login extends Component {
+  componentDidMount() {
+    const { history } = this.props;
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        history.push("/dashboard");
+      }
+    });
+  }
+
   _googleSignIn = () => {
     const { history } = this.props;
     firebase
@@ -18,7 +30,7 @@ class Login extends Component {
             history.push("/");
           }
         } catch (err) {
-          console.error(err);
+          // Ignore error
         }
       })
       .catch(() => alert("An unexpected error occurred."));
@@ -37,7 +49,7 @@ class Login extends Component {
             <h3>Administrator Login</h3>
             <button
               onClick={this._googleSignIn}
-              className="uk-button uk-button-danger"
+              className="uk-button uk-button-secondary"
             >
               LOGIN
             </button>
