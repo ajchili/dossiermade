@@ -10,6 +10,7 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import AdminDashboard from "../Pages/Admin/Home";
 import AdminContactInformation from "../Pages/Admin/ContactInformation";
+import AdminWork from "../Pages/Admin/Work";
 
 class Navigator extends Component {
   state = {
@@ -45,6 +46,13 @@ class Navigator extends Component {
               path="/dashboard/contact"
               exact
               render={() => authenticatedRoute(AdminContactInformation)}
+            />
+          )}
+          {checkedAuthentication && (
+            <Route
+              path="/dashboard/work"
+              extact
+              render={() => authenticatedRoute(AdminWork)}
             />
           )}
           <Route path="/" component={Home} />
