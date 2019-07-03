@@ -36,6 +36,7 @@ class WorkCard extends Component {
       this.setState({ projects });
     } catch (err) {
       // TODO: Handle error
+      console.warn(err);
     }
   }
 
@@ -44,8 +45,9 @@ class WorkCard extends Component {
     return (
       <Card
         title="OUR WORK"
+        backgroundColor="light"
         content={
-          <div className="uk-light">
+          <div className="uk-dark">
             {projects.map((project, i) => (
               <div
                 key={project.id}
