@@ -3,7 +3,7 @@ import Lander from "../Components/HomeLander";
 import Navbar from "../Components/HomeNavbar";
 import AboutCard from "../Components/AboutCard";
 import ContactCard from "../Components/ContactCard";
-import ContentContainer from "../Components/HomeContentContainer";
+import ContentContainer from "../Components/ContentContainer";
 import ServicesCard from "../Components/ServicesCard";
 import WorkCard from "../Components/WorkCard";
 
