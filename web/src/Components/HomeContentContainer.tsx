@@ -18,6 +18,9 @@ export default class HomeContentContainer extends Component<Props> {
             ? "uk-background-muted"
             : "uk-background-secondary"
         }
+        style={{
+          position: "relative"
+        }}
       >
         <div style={styles.content}>{cardContent}</div>
       </div>
