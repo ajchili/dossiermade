@@ -50,6 +50,7 @@ export default class EditableWorkCard extends Component<Props, State> {
           >
             <div style={{ flex: 2, padding: 10 }}>
               <iframe
+                title="video"
                 src={work.url.replace("watch?v=", "embed/")}
                 width="100%"
                 height="100%"
