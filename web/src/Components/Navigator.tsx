@@ -1,25 +1,33 @@
-import React, { Component } from "react";
+import React, { Component, ComponentClass } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch
 } from "react-router-dom";
-import firebase from "../lib/firebase";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import AdminDashboard from "../Pages/Admin/Home";
 import AdminContactInformation from "../Pages/Admin/ContactInformation";
 import AdminWork from "../Pages/Admin/Work";
+import firebase from "../lib/firebase";
 
-class Navigator extends Component {
-  state = {
-    checkedAuthentication: false,
-    user: null
-  };
+interface State {
+  checkedAuthentication: boolean;
+  user: firebase.User | null;
+}
+
+class Navigator extends Component<any, State> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      checkedAuthentication: false,
+      user: null
+    };
+  }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged((user: firebase.User | null) => {
       this.setState({ checkedAuthentication: true, user });
     });
   }
@@ -27,12 +35,13 @@ class Navigator extends Component {
   render() {
     const { checkedAuthentication, user } = this.state;
 
-    const authenticatedRoute = Component =>
+    const authenticatedRoute = (Component: ComponentClass) =>
       user ? <Component /> : <Redirect to="/login" />;
 
     return (
       <Router>
         <Switch>
+          <Route path="/" component={Home} />
           <Route path="/login" exact component={Login} />
           {checkedAuthentication && (
             <Route
@@ -55,7 +64,6 @@ class Navigator extends Component {
               render={() => authenticatedRoute(AdminWork)}
             />
           )}
-          <Route path="/" component={Home} />
         </Switch>
       </Router>
     );
