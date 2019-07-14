@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import firebase from "../lib/firebase";
 
-class AdminDashboardNavbar extends Component {
+interface Props extends RouteComponentProps {}
+
+class AdminDashboardNavbar extends Component<Props, {}> {
   _logout = () => {
     firebase.auth().signOut();
   };
