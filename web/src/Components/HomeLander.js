@@ -5,9 +5,7 @@ class HomeLander extends Component {
   render() {
     return (
       <div style={styles.lander}>
-        <div className="uk-visible@m">
-          <BackgroundVideo />
-        </div>
+        <BackgroundVideo />
         <div className="uk-light" style={styles.landerContent}>
           <div style={styles.landerContentItems}>
             <p className="uk-h1 uk-text-center">DOSSIER MADE MEDIA</p>
