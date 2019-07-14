@@ -6,7 +6,7 @@ export interface Props {
   id: string;
 }
 
-export default class HomeContentContainer extends Component<Props> {
+export default class ContentContainer extends Component<Props> {
   render() {
     const { backgroundColor = "light", cardContent, id } = this.props;
 
