@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Lander from "../Components/HomeLander";
 import Navbar from "../Components/HomeNavbar";
+import AboutCard from "../Components/AboutCard";
 import ContactCard from "../Components/ContactCard";
 import ContentContainer from "../Components/HomeContentContainer";
 import ServicesCard from "../Components/ServicesCard";
@@ -13,7 +14,7 @@ class Home extends Component {
         <Lander id="lander" />
         <Navbar />
         <ContentContainer id="work" cardContent={<WorkCard />} />
-        <ContentContainer id="about" />
+        <ContentContainer id="about" cardContent={<AboutCard />} />
         <ContentContainer id="services" cardContent={<ServicesCard />} />
         <ContentContainer
           id="contact"
