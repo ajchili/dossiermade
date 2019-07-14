@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import firebase, { validateUserPermissions } from "../../lib/firebase";
 import Card from "../../Components/Card";
 import Navbar from "../../Components/AdminDashboardNavbar";
 
-class Home extends Component {
+export interface Props extends RouteComponentProps {}
+
+class Home extends Component<Props> {
   componentDidMount() {
     const { history } = this.props;
     firebase.auth().onAuthStateChanged(async user => {
