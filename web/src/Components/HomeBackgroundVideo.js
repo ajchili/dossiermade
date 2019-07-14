@@ -22,7 +22,6 @@ const styles = {
     backgroundColor: "#000000",
     objectFit: "contain",
     position: "fixed",
-    zIndex: -1,
     align: "center"
   }
 };
