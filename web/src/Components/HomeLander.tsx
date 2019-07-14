@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import BackgroundVideo from "./HomeBackgroundVideo";
 
-class HomeLander extends Component {
+export default class HomeLander extends Component {
   render() {
     return (
       <div style={styles.lander}>
         <BackgroundVideo />
-        <div className="uk-light" style={styles.landerContent}>
-          <div style={styles.landerContentItems}>
+        <div
+          className="uk-light"
+          // @ts-ignore
+          style={styles.landerContent}
+        >
+          <div
+            // @ts-ignore
+            style={styles.landerContentItems}
+          >
             <p className="uk-h1 uk-text-center">DOSSIER MADE MEDIA</p>
             <div className="uk-text-center">
               <a href="#work" uk-scroll="true">
@@ -52,5 +59,3 @@ const styles = {
     mixBlendMode: "difference"
   }
 };
-
-export default HomeLander;
