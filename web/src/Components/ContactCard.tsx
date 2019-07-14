@@ -10,7 +10,7 @@ class ContactCard extends Component<any, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      people: []
+      people: Person.getStaticPeople()
     };
   }
 
