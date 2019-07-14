@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import firebase, {
   provider,
   validateUserPermissions
 } from "../Components/firebase";
 
-class Login extends Component {
-  constructor(props) {
+interface Props extends RouteComponentProps {}
+
+interface State {
+  hasCheckedAuthentication: boolean;
+}
+
+class Login extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       hasCheckedAuthentication: false
@@ -82,13 +88,11 @@ const styles = {
   content: {
     width: "100%",
     height: "100%",
-    display: "table",
-    position: "relative"
+    display: "table"
   },
   contentItems: {
     display: "table-cell",
-    verticalAlign: "middle",
-    mixBlendMode: "difference"
+    verticalAlign: "middle"
   }
 };
 
