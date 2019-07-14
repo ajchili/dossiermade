@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import BackgroundVideo from "./HomeBackgroundVideo";
 
-export default class HomeLander extends Component {
+interface Props {
+  id: string;
+}
+
+export default class HomeLander extends Component<Props> {
   render() {
+    const { id } = this.props;
     return (
-      <div style={styles.lander}>
+      <div id={id} style={styles.lander}>
         <BackgroundVideo />
         <div
           className="uk-light"
