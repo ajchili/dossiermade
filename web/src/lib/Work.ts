@@ -60,6 +60,27 @@ export default class Work {
     });
     return work;
   }
+  static async getRecent(): Promise<Array<Work>> {
+    let work: Array<Work> = [];
+    let query = await firebase
+      .firestore()
+      .collection("work")
+      .orderBy("date", "desc")
+      .limit(5)
+      .get();
+    query.docs.forEach(doc => {
+      work.push(
+        new Work(doc.id, {
+          title: doc.data().title || "",
+          description: doc.data().description || "",
+          url: doc.data().url || "",
+          date: doc.data().date || -1,
+          backgroundImage: doc.data().backgroundImage || ""
+        })
+      );
+    });
+    return work;
+  }
   async update(data: WorkSnapshot) {
     await firebase
       .firestore()

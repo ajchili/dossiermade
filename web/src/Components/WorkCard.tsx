@@ -1,38 +1,19 @@
 import React, { Component } from "react";
-import firebase from "./firebase";
 import Card from "./Card";
+import Work from "../lib/Work";
 
-const staticProjcets = [
-  {
-    id: "aevo",
-    title: "VEHICLE SHOWCASE",
-    subtitle: "Aviel's EVO X",
-    backgroundImage:
-      "https://scontent-iad3-1.cdninstagram.com/vp/7f2a39d2641eefec50c53dee39f3f078/5CE488E3/t51.2885-15/sh0.08/e35/s640x640/52843953_259473518331372_1976875947050269731_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com"
-  },
-  {
-    id: "egti",
-    title: "VEHICLE SHOWCASE",
-    subtitle: "Elijah's MKVI GTI",
-    backgroundImage: "http://dossiermade.com/media/gtiFrontLake.jpg"
-  }
-];
+interface State {
+  projects: Array<Work>;
+}
 
-class WorkCard extends Component {
+class WorkCard extends Component<{}, State> {
   state = {
-    projects: staticProjcets
+    projects: []
   };
 
   async componentDidMount() {
     try {
-      let querySnapshot = await firebase
-        .firestore()
-        .collection("work")
-        .limit(5)
-        .get();
-      let projects = querySnapshot.docs.map(snapshot => {
-        return { id: snapshot.id, ...snapshot.data() };
-      });
+      let projects = await Work.getRecent();
       this.setState({ projects });
     } catch (err) {
       // TODO: Handle error
@@ -48,11 +29,11 @@ class WorkCard extends Component {
         backgroundColor="light"
         content={
           <div className="uk-dark">
-            {projects.map((project, i) => (
+            {projects.map((project: Work, i) => (
               <div
                 key={project.id}
                 className="uk-column-1-1"
-                style={i > 0 ? styles.project : null}
+                style={i > 0 ? styles.project : undefined}
               >
                 <div
                   className="uk-card uk-card-large uk-card-hover uk-card-body"
@@ -64,11 +45,8 @@ class WorkCard extends Component {
                   }}
                 >
                   <p className="uk-h2">{project.title}</p>
-                  <p className="uk-h3">{project.subtitle}</p>
-                  <button
-                    className="uk-button uk-button-text"
-                    style={styles.viewButton}
-                  >
+                  <p className="uk-h3">{project.description}</p>
+                  <button className="uk-button uk-button-secondary">
                     View
                   </button>
                 </div>
@@ -89,12 +67,6 @@ class WorkCard extends Component {
 const styles = {
   project: {
     paddingTop: "3.5vh"
-  },
-  viewButton: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
-    margin: 10
   }
 };
 
