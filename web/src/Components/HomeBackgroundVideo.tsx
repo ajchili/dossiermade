@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import Video from "../Assets/LazySaturday.mp4";
+const video = require("../Assets/LazySaturday.mp4");
 
 class HomeBackgroundVideo extends Component {
   render() {
     return (
       <video
+        // @ts-ignore
         style={styles.video}
-        src={Video}
+        src={video}
         muted
         autoPlay
         loop
