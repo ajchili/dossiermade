@@ -1,4 +1,4 @@
-import firebase from "../Components/firebase";
+import firebase from "./firebase";
 
 export interface WorkSnapshot {
   title?: string;

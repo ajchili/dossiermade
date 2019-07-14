@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import firebase from "./firebase";
+import firebase from "../lib/firebase";
 
 class AdminDashboardNavbar extends Component {
   _logout = () => {

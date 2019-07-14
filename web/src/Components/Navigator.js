@@ -5,7 +5,7 @@ import {
   Route,
   Switch
 } from "react-router-dom";
-import firebase from "./firebase";
+import firebase from "../lib/firebase";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import AdminDashboard from "../Pages/Admin/Home";

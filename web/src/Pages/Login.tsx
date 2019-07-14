@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import firebase, {
   provider,
   validateUserPermissions
-} from "../Components/firebase";
+} from "../lib/firebase";
 
 interface Props extends RouteComponentProps {}
 

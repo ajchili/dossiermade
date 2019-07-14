@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import firebase, { validateUserPermissions } from "../../Components/firebase";
+import firebase, { validateUserPermissions } from "../../lib/firebase";
 import Card from "../../Components/Card";
 import Navbar from "../../Components/AdminDashboardNavbar";
 

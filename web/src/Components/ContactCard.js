@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import firebase from "./firebase";
+import firebase from "../lib/firebase";
 import Card from "./Card";
 
 const staticPeople = [
