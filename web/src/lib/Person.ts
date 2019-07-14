@@ -32,6 +32,20 @@ export default class Person {
       .add(data);
     return new Person(doc.id, data);
   }
+  static getStaticPeople(): Array<Person> {
+    return [
+      new Person("", {
+        name: "Elijah Cutler",
+        email: "info@dossiermade.com",
+        phoneNumber: "(410)-402-3011"
+      }),
+      new Person("", {
+        name: "Kirin Patel",
+        email: "info@dossiermade.com",
+        phoneNumber: "(301)-641-5838"
+      })
+    ];
+  }
   static async getAll(): Promise<Array<Person>> {
     let people: Array<Person> = [];
     let query = await firebase
