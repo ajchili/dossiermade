@@ -41,7 +41,6 @@ class Navigator extends Component<any, State> {
     return (
       <Router>
         <Switch>
-          <Route path="/" component={Home} />
           <Route path="/login" exact component={Login} />
           {checkedAuthentication && (
             <Route
@@ -64,6 +63,7 @@ class Navigator extends Component<any, State> {
               render={() => authenticatedRoute(AdminWork)}
             />
           )}
+          <Route path="/" component={Home} />
         </Switch>
       </Router>
     );
