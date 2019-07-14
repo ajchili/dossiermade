@@ -6,10 +6,13 @@ interface State {
   projects: Array<Work>;
 }
 
-class WorkCard extends Component<{}, State> {
-  state = {
-    projects: []
-  };
+class WorkCard extends Component<any, State> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      projects: []
+    };
+  }
 
   async componentDidMount() {
     try {
