@@ -7,7 +7,7 @@ const links = [
   { name: "CONTACT", url: "contact" }
 ];
 
-class HomeNavbar extends Component {
+export default class HomeNavbar extends Component {
   render() {
     return (
       <div>
@@ -97,5 +97,3 @@ class HomeNavbar extends Component {
     );
   }
 }
-
-export default HomeNavbar;
