@@ -1,15 +1,25 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import firebase, { validateUserPermissions } from "../../lib/firebase";
+import Person, { PersonSnapshot } from "../../lib/Person";
 import EditableContactCard from "../../Components/EditableContactCard";
 import Navbar from "../../Components/AdminDashboardNavbar";
 
-class ContactInformation extends Component {
-  constructor(props) {
+export interface Props extends RouteComponentProps {}
+
+interface State {
+  firebaseAuthListener: firebase.Unsubscribe | null;
+  people: Array<Person>;
+  peopleBeingEdited: Array<string>;
+}
+
+class ContactInformation extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       firebaseAuthListener: null,
-      people: []
+      people: [],
+      peopleBeingEdited: []
     };
   }
 
@@ -38,50 +48,39 @@ class ContactInformation extends Component {
 
   componentWillUnmount() {
     const { firebaseAuthListener } = this.state;
-    firebaseAuthListener();
+    if (firebaseAuthListener) {
+      firebaseAuthListener();
+    }
   }
 
   _loadPeople = async () => {
     try {
-      let query = await firebase
-        .firestore()
-        .collection("contact-information")
-        .get();
-      let people = query.docs.map(doc => {
-        return {
-          id: doc.id,
-          ...doc.data(),
-          isEditing: false
-        };
-      });
+      let people = await Person.getAll();
       this.setState({ people });
     } catch (err) {
       // TODO: Hanle Error
+      console.error(err);
     }
   };
 
   _createPerson = async () => {
     const { people } = this.state;
     try {
-      let person = {
+      let defaultData: PersonSnapshot = {
         name: "",
         email: "info@dossiermade.com",
-        phone: ""
+        phoneNumber: ""
       };
-      let doc = await firebase
-        .firestore()
-        .collection("contact-information")
-        .add(person);
-      person.id = doc.id;
-      person.isEditing = true;
+      let person = await Person.create(defaultData);
       people.push(person);
       this.setState({ people });
     } catch (err) {
       // TODO: Handle Error
+      console.error(err);
     }
   };
 
-  _deletePerson = async id => {
+  _deletePerson = async (id: string) => {
     const { people } = this.state;
     const { confirm } = window;
     let person = people.find(person => person.id === id);
@@ -90,41 +89,34 @@ class ContactInformation extends Component {
       return;
     }
     try {
-      await firebase
-        .firestore()
-        .collection("contact-information")
-        .doc(id)
-        .delete();
+      await person.delete();
       this.setState({
         people: people.filter(person => person.id !== id)
       });
     } catch (err) {
       // TODO: Handle Error
+      console.error(err);
     }
   };
 
-  _savePerson = async (id, newInformation) => {
-    const { people } = this.state;
+  _savePerson = async (id: string, newInformation: PersonSnapshot) => {
+    const { people, peopleBeingEdited } = this.state;
     let person = people.find(person => person.id === id);
     if (!person) return;
     try {
-      await firebase
-        .firestore()
-        .collection("contact-information")
-        .doc(id)
-        .set(newInformation);
-      Object.keys(newInformation).forEach(key => {
-        person[key] = newInformation[key];
+      await person.update(newInformation);
+      this.setState({
+        people,
+        peopleBeingEdited: peopleBeingEdited.filter(id => id !== person!.id)
       });
-      person.isEditing = false;
-      this.setState({ people });
     } catch (err) {
       // TODO: Handle Error
+      console.error(err);
     }
   };
 
   render() {
-    const { people } = this.state;
+    const { people, peopleBeingEdited } = this.state;
     return (
       <div>
         <Navbar />
@@ -138,21 +130,22 @@ class ContactInformation extends Component {
           return (
             <EditableContactCard
               key={person.id}
-              name={person.name}
-              emailAddress={person.email}
-              phoneNumber={person.phone}
-              isEditing={person.isEditing}
+              person={person}
+              isEditing={peopleBeingEdited.includes(person.id)}
               onEdit={() => {
-                person.isEditing = true;
-                this.setState({ people });
+                peopleBeingEdited.push(person.id);
+                this.setState({ peopleBeingEdited });
               }}
               onDelete={() => this._deletePerson(person.id)}
               onCancelEditing={() => {
-                person.isEditing = false;
-                this.setState({ people });
+                this.setState({
+                  peopleBeingEdited: peopleBeingEdited.filter(
+                    id => id !== person.id
+                  )
+                });
               }}
-              onSave={(name, email, phone) => {
-                this._savePerson(person.id, { name, email, phone });
+              onSave={(name?: string, email?: string, phoneNumber?: string) => {
+                this._savePerson(person.id, { name, email, phoneNumber });
               }}
             />
           );

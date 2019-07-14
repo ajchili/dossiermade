@@ -1,32 +1,22 @@
 import React, { Component } from "react";
-import firebase from "../lib/firebase";
 import Card from "./Card";
+import Person from "../lib/Person";
 
-const staticPeople = [
-  {
-    name: "Kirin Patel",
-    email: "info@dossiermade.com",
-    phone: "301-641-5838"
-  },
-  {
-    name: "Elijah Cutler",
-    email: "info@dossiermade.com",
-    phone: "410-402-3011"
+interface State {
+  people: Array<Person>;
+}
+
+class ContactCard extends Component<any, State> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      people: []
+    };
   }
-];
-
-class ContactCard extends Component {
-  state = {
-    people: staticPeople
-  };
 
   async componentDidMount() {
     try {
-      let querySnapshot = await firebase
-        .firestore()
-        .collection("contact-information")
-        .get();
-      let people = querySnapshot.docs.map(doc => doc.data());
+      let people = await Person.getAll();
       this.setState({ people });
     } catch (err) {
       // Do nothing on error
@@ -59,10 +49,13 @@ class ContactCard extends Component {
                     </a>
                   )}
                   <br />
-                  {person.phone && (
-                    <a href={`tel:1-${person.phone}`} className="uk-link-reset">
+                  {person.phoneNumber && (
+                    <a
+                      href={`tel:1-${person.phoneNumber}`}
+                      className="uk-link-reset"
+                    >
                       <button className="uk-button uk-button-text">
-                        {person.phone}
+                        {person.phoneNumber}
                       </button>
                     </a>
                   )}

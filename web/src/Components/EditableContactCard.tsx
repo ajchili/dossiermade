@@ -1,26 +1,40 @@
 import React, { Component } from "react";
+import Person from "../lib/Person";
 
-export default class EditableContactCard extends Component {
-  constructor(props) {
+export interface Props {
+  person: Person;
+  isEditing: boolean;
+  onDelete?: () => void;
+  onEdit?: () => void;
+  onCancelEditing?: () => void;
+  onSave?: (name?: string, email?: string, phoneNumber?: string) => void;
+}
+
+interface State {
+  name?: string;
+  email?: string;
+  phoneNumber?: string;
+}
+
+export default class EditableContactCard extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
-      name: props.name || "",
-      emailAddress: props.emailAddress || "",
-      phoneNumber: props.phoneNumber || ""
+      name: props.person.name || "",
+      email: props.person.email || "",
+      phoneNumber: props.person.phoneNumber || ""
     };
   }
 
-  _onValueChange = (key, value) => {
-    let object = {};
+  _onValueChange = (key: "name" | "email" | "phoneNumber", value: string) => {
+    let object: State = {};
     object[key] = value;
     this.setState(object);
   };
 
   render() {
     const {
-      name,
-      emailAddress,
-      phoneNumber,
+      person,
       isEditing,
       onDelete = () => console.log("Delete action missing!"),
       onEdit = () => console.log("Edit action missing!"),
@@ -31,21 +45,21 @@ export default class EditableContactCard extends Component {
     return (
       <div className="uk-card uk-card-body uk-card-default uk-margin-top uk-margin-left uk-margin-right">
         {!isEditing ? (
-          <p className="uk-h1">{name}</p>
+          <p className="uk-h1">{person.name}</p>
         ) : (
           <input
             className="uk-input"
             type="text"
             placeholder="Name"
-            defaultValue={name}
+            defaultValue={person.name}
             onChange={e => this._onValueChange("name", e.target.value)}
           />
         )}
         {!isEditing ? (
           <p className="uk-h4">
-            {emailAddress}
+            {person.email}
             <br />
-            {phoneNumber}
+            {person.phoneNumber}
           </p>
         ) : (
           <div>
@@ -53,19 +67,15 @@ export default class EditableContactCard extends Component {
               className="uk-input uk-margin-top"
               type="email"
               placeholder="Email Address"
-              defaultValue={emailAddress}
-              onChange={e =>
-                this._onValueChange("emailAddress", e.target.value)
-              }
+              defaultValue={person.email}
+              onChange={e => this._onValueChange("email", e.target.value)}
             />
             <input
               className="uk-input uk-margin-top"
               type="text"
               placeholder="Phone Number"
-              defaultValue={phoneNumber}
-              onChange={e =>
-                this._onValueChange("phoneNumber", e.target.value)
-              }
+              defaultValue={person.phoneNumber}
+              onChange={e => this._onValueChange("phoneNumber", e.target.value)}
             />
           </div>
         )}
@@ -94,7 +104,7 @@ export default class EditableContactCard extends Component {
               onClick={() =>
                 onSave(
                   this.state.name,
-                  this.state.emailAddress,
+                  this.state.email,
                   this.state.phoneNumber
                 )
               }
@@ -107,10 +117,3 @@ export default class EditableContactCard extends Component {
     );
   }
 }
-
-EditableContactCard.defaultProps = {
-  name: "Name",
-  emailAddress: "info@dossiermade.com",
-  phoneNumber: "+1 123-456-7890",
-  isEditing: false
-};
