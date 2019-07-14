@@ -24,15 +24,14 @@ export async function validateUserPermissions() {
         .collection("users")
         .doc(user.uid)
         .get();
-      if (
-        documentSnapshot.exists &&
-        documentSnapshot.data() &&
-        documentSnapshot.data().admin === true
-      ) {
-        return true;
-      } else {
-        throw new Error("Insufficient Permissions!");
+      if (documentSnapshot.exists && documentSnapshot.data() !== undefined) {
+        const data = documentSnapshot.data()!;
+        const isAdmin = data.admin && data.admin === true;
+        if (isAdmin) {
+          return true;
+        }
       }
+      throw new Error("Insufficient Permissions!");
     } catch (err) {
       app.auth().signOut();
       return false;
