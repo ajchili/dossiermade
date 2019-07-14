@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from "./Card";
 
-class ServicesCard extends Component {
+export default class ServicesCard extends Component {
   render() {
     return (
       <Card
@@ -29,5 +29,3 @@ class ServicesCard extends Component {
     );
   }
 }
-
-export default ServicesCard;
