@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Card from "./Card";
 import Work from "../lib/Work";
 
@@ -49,16 +50,19 @@ class WorkCard extends Component<any, State> {
                 >
                   <p className="uk-h2">{project.title}</p>
                   <p className="uk-h3">{project.description}</p>
-                  <button className="uk-button uk-button-secondary">
+                  <Link
+                    to={`/work/${project.id}`}
+                    className="uk-button uk-button-secondary"
+                  >
                     View
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
             <div className="uk-text-center" style={styles.project}>
-              <button className="uk-button uk-button-secondary" type="button">
+              <Link to="/work" className="uk-button uk-button-secondary">
                 More
-              </button>
+              </Link>
             </div>
           </div>
         }

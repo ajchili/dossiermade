@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
+import Work from "../Pages/Work";
 import AdminDashboard from "../Pages/Admin/Home";
 import AdminContactInformation from "../Pages/Admin/ContactInformation";
 import AdminWork from "../Pages/Admin/Work";
@@ -42,6 +43,8 @@ class Navigator extends Component<any, State> {
       <Router>
         <Switch>
           <Route path="/login" exact component={Login} />
+          <Route path="/work" exact component={Work} />
+          <Route path="/work/:id" exact component={Work} />
           {checkedAuthentication && (
             <Route
               path="/dashboard"
