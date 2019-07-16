@@ -3,14 +3,15 @@ import BackgroundVideo from "./HomeBackgroundVideo";
 
 interface Props {
   id: string;
+  showVideo: boolean;
 }
 
 export default class HomeLander extends Component<Props> {
   render() {
-    const { id } = this.props;
+    const { id, showVideo = false } = this.props;
     return (
       <div id={id} style={styles.lander}>
-        <BackgroundVideo />
+        {showVideo && <BackgroundVideo />}
         <div
           className="uk-light"
           // @ts-ignore
@@ -49,7 +50,8 @@ export default class HomeLander extends Component<Props> {
 const styles = {
   lander: {
     width: "100%",
-    height: "100vh"
+    height: "100vh",
+    backgroundColor: "#000000"
   },
   landerContent: {
     width: "100%",

@@ -7,11 +7,27 @@ import ContentContainer from "../Components/ContentContainer";
 import ServicesCard from "../Components/ServicesCard";
 import WorkCard from "../Components/WorkCard";
 
-class Home extends Component {
+interface State {
+  showVideo: boolean;
+}
+
+class Home extends Component<any, State> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      showVideo: false
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(() => this.setState({ showVideo: true }), 1000);
+  }
+  
   render() {
+    const { showVideo } = this.state;
     return (
       <div>
-        <Lander id="lander" />
+        <Lander id="lander" showVideo={showVideo} />
         <Navbar />
         <ContentContainer id="work" cardContent={<WorkCard />} />
         <ContentContainer id="about" cardContent={<AboutCard />} />
