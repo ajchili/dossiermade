@@ -12,7 +12,7 @@ export default class HomeNavbar extends Component {
     return (
       <div>
         <div
-          className="uk-visible@m"
+          className="uk-visible@s"
           uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky;"
         >
           <nav
@@ -43,7 +43,7 @@ export default class HomeNavbar extends Component {
           </nav>
         </div>
         <div
-          className="uk-hidden@m"
+          className="uk-hidden@s"
           uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky;"
         >
           <nav className="uk-navbar-container uk-navbar-secondary uk-light">
