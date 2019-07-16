@@ -33,6 +33,9 @@ export default class Work {
   get backgroundImage() {
     return this._data.backgroundImage || "";
   }
+  get embeddedURL() {
+    return (this._data.url || "").replace("watch?v=", "embed/")
+  }
   static async create(data: WorkSnapshot) {
     let doc = await firebase
       .firestore()
@@ -60,13 +63,29 @@ export default class Work {
     });
     return work;
   }
-  static async getRecent(): Promise<Array<Work>> {
+  static async getById(id: string): Promise<Work> {
+    let doc = await firebase
+      .firestore()
+      .collection("work")
+      .doc(id)
+      .get();
+    if (!doc.exists) {
+      throw new Error("Work does not exist!");
+    }
+    let data = doc.data() as WorkSnapshot;
+    return new Work(id, data);
+  }
+  static async get(
+    startAfter: string = "",
+    limit: number = 5
+  ): Promise<Array<Work>> {
     let work: Array<Work> = [];
     let query = await firebase
       .firestore()
       .collection("work")
       .orderBy("date", "desc")
-      .limit(5)
+      .startAfter(startAfter)
+      .limit(limit)
       .get();
     query.docs.forEach(doc => {
       work.push(
