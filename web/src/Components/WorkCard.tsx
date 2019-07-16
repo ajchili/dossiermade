@@ -4,21 +4,21 @@ import Card from "./Card";
 import Work from "../lib/Work";
 
 interface State {
-  projects: Array<Work>;
+  allWork: Array<Work>;
 }
 
 class WorkCard extends Component<any, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      projects: []
+      allWork: []
     };
   }
 
   async componentDidMount() {
     try {
-      let projects = await Work.getRecent();
-      this.setState({ projects });
+      let allWork = await Work.get();
+      this.setState({ allWork });
     } catch (err) {
       // TODO: Handle error
       console.warn(err);
@@ -26,16 +26,16 @@ class WorkCard extends Component<any, State> {
   }
 
   render() {
-    const { projects } = this.state;
+    const { allWork } = this.state;
     return (
       <Card
         title="OUR WORK"
         backgroundColor="light"
         content={
           <div className="uk-dark">
-            {projects.map((project: Work, i) => (
+            {allWork.map((work: Work, i: number) => (
               <div
-                key={project.id}
+                key={work.id}
                 className="uk-column-1-1"
                 style={i > 0 ? styles.project : undefined}
               >
@@ -45,13 +45,16 @@ class WorkCard extends Component<any, State> {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    backgroundImage: `url(${project.backgroundImage})`
+                    backgroundImage: `url(${work.backgroundImage})`
                   }}
                 >
-                  <p className="uk-h2">{project.title}</p>
-                  <p className="uk-h3">{project.description}</p>
+                  <p className="uk-h2">{work.title}</p>
+                  <p className="uk-h3">{work.description}</p>
                   <Link
-                    to={`/work/${project.id}`}
+                    to={{
+                      pathname: `/work/${work.id}`,
+                      state: { work }
+                    }}
                     className="uk-button uk-button-secondary"
                   >
                     View
