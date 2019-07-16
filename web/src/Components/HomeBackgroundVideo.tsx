@@ -33,6 +33,7 @@ export default class HomeBackgroundVideo extends Component<any, State> {
     return (
       <div className="uk-visible@m">
         <iframe
+          title="backgroundVideo"
           src={`https://www.youtube-nocookie.com/embed/${videoID}?autoplay=1&amp;loop=1&amp;playlist=${videoID}&amp;showinfo=0&amp;rel=0&amp;modestbranding=1&amp;playsinline=1&amp;autohide=1&amp;showinfo=0&amp;controls=0`}
           frameborder="0"
           uk-responsive
