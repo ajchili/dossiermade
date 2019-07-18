@@ -34,7 +34,7 @@ export default class Work {
     return this._data.backgroundImage || "";
   }
   get embeddedURL() {
-    return (this._data.url || "").replace("watch?v=", "embed/")
+    return (this._data.url || "").replace("watch?v=", "embed/");
   }
   static async create(data: WorkSnapshot) {
     let doc = await firebase
@@ -75,16 +75,12 @@ export default class Work {
     let data = doc.data() as WorkSnapshot;
     return new Work(id, data);
   }
-  static async get(
-    startAfter: string = "",
-    limit: number = 5
-  ): Promise<Array<Work>> {
+  static async getRecent(limit: number = 5): Promise<Array<Work>> {
     let work: Array<Work> = [];
     let query = await firebase
       .firestore()
       .collection("work")
       .orderBy("date", "desc")
-      .startAfter(startAfter)
       .limit(limit)
       .get();
     query.docs.forEach(doc => {
