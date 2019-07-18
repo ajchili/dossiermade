@@ -32,7 +32,7 @@ class WorkCard extends Component<any, State> {
         title="OUR WORK"
         backgroundColor="light"
         content={
-          <div className="uk-dark">
+          <div>
             {allWork.map((work: Work, i: number) => (
               <div
                 key={work.id}
@@ -40,25 +40,32 @@ class WorkCard extends Component<any, State> {
                 style={i > 0 ? styles.project : undefined}
               >
                 <div
-                  className="uk-card uk-card-large uk-card-hover uk-card-body"
+                  className="uk-card uk-card-hover uk-card-body"
                   style={{
+                    backgroundAttachment: "fixed",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                     backgroundImage: `url(${work.backgroundImage})`
                   }}
                 >
-                  <p className="uk-h2">{work.title}</p>
-                  <p className="uk-h3">{work.description}</p>
-                  <Link
-                    to={{
-                      pathname: `/work/${work.id}`,
-                      state: { work }
-                    }}
-                    className="uk-button uk-button-secondary"
-                  >
-                    View
-                  </Link>
+                  <div className="uk-light uk-background-secondary">
+                    <div className="uk-padding">
+                      <p className="uk-h2">{work.title}</p>
+                      <p>{work.description}</p>
+                    </div>
+                  </div>
+                  <div className="uk-text-center uk-margin-top">
+                    <Link
+                      to={{
+                        pathname: `/work/${work.id}`,
+                        state: { work }
+                      }}
+                      className="uk-button uk-button-secondary"
+                    >
+                      View
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
