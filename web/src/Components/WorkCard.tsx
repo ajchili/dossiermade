@@ -1,43 +1,38 @@
-import React, { Component } from "react";
+import React, { Component, ReactElement } from "react";
 import { Link } from "react-router-dom";
 import Card from "./Card";
 import Work from "../lib/Work";
 
-interface State {
-  allWork: Array<Work>;
+interface Props {
+  backgroundColor?: "light" | "dark";
+  bottomContent?: ReactElement;
+  work: Array<Work>;
+  page: "home" | "other";
 }
 
-class WorkCard extends Component<any, State> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      allWork: []
-    };
-  }
-
-  async componentDidMount() {
-    try {
-      let allWork = await Work.get();
-      this.setState({ allWork });
-    } catch (err) {
-      // TODO: Handle error
-      console.warn(err);
-    }
-  }
-
+class WorkCard extends Component<Props> {
   render() {
-    const { allWork } = this.state;
+    const {
+      backgroundColor = "light",
+      bottomContent,
+      work: allWork,
+      page
+    } = this.props;
     return (
       <Card
         title="OUR WORK"
-        backgroundColor="light"
+        backgroundColor={backgroundColor}
         content={
           <div>
+            {!allWork.length && (
+              <div className="uk-text-center uk-dark">
+                <div uk-spinner="ratio: 1" />
+              </div>
+            )}
             {allWork.map((work: Work, i: number) => (
               <div
                 key={work.id}
-                className="uk-column-1-1"
-                style={i > 0 ? styles.project : undefined}
+                className={`uk-column-1-1 ${i > 0 ? "uk-margin-top" : ""}`}
               >
                 <div
                   className="uk-card uk-card-hover uk-card-body"
@@ -69,10 +64,16 @@ class WorkCard extends Component<any, State> {
                 </div>
               </div>
             ))}
-            <div className="uk-text-center" style={styles.project}>
-              <Link to="/work" className="uk-button uk-button-secondary">
-                More
-              </Link>
+            <div className="uk-text-center uk-margin-top">
+              {page === "home" && (
+                <Link
+                  to={{ pathname: "/work", state: { allWork } }}
+                  className="uk-button uk-button-secondary"
+                >
+                  View All
+                </Link>
+              )}
+              {page === "other" && bottomContent}
             </div>
           </div>
         }
@@ -80,11 +81,5 @@ class WorkCard extends Component<any, State> {
     );
   }
 }
-
-const styles = {
-  project: {
-    paddingTop: "3.5vh"
-  }
-};
 
 export default WorkCard;
