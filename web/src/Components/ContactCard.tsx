@@ -2,29 +2,13 @@ import React, { Component } from "react";
 import Card from "./Card";
 import Person from "../lib/Person";
 
-interface State {
+interface Props {
   people: Array<Person>;
 }
 
-class ContactCard extends Component<any, State> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      people: Person.getStaticPeople()
-    };
-  }
-
-  async componentDidMount() {
-    try {
-      let people = await Person.getAll();
-      this.setState({ people });
-    } catch (err) {
-      // Do nothing on error
-    }
-  }
-
+class ContactCard extends Component<Props> {
   render() {
-    const { people } = this.state;
+    const { people } = this.props;
     return (
       <Card
         title="CONTACT US"
