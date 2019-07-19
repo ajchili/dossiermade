@@ -5,6 +5,7 @@ import {
   Route,
   Switch
 } from "react-router-dom";
+import AllWork from "../Pages/AllWork";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Work from "../Pages/Work";
@@ -43,7 +44,7 @@ class Navigator extends Component<any, State> {
       <Router>
         <Switch>
           <Route path="/login" exact component={Login} />
-          <Route path="/work" exact component={Work} />
+          <Route path="/work" exact component={AllWork} />
           <Route path="/work/:id" exact component={Work} />
           {checkedAuthentication && (
             <Route
