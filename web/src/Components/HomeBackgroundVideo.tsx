@@ -3,6 +3,7 @@ import React, { Component } from "react";
 const videoID = "KS29PRHNC2A";
 
 interface State {
+  browser: "chrome" | "safari";
   canResizeBlackBars: boolean;
 }
 
@@ -10,6 +11,9 @@ export default class HomeBackgroundVideo extends Component<any, State> {
   constructor(props: any) {
     super(props);
     this.state = {
+      browser: navigator.userAgent.toLowerCase().includes("safari")
+        ? "safari"
+        : "chrome",
       canResizeBlackBars: false
     };
   }
@@ -28,7 +32,7 @@ export default class HomeBackgroundVideo extends Component<any, State> {
   }
 
   render() {
-    const { canResizeBlackBars } = this.state;
+    const { browser, canResizeBlackBars } = this.state;
     const height = canResizeBlackBars ? "8vh" : 60;
     return (
       <div className="uk-visible@s">
@@ -38,8 +42,15 @@ export default class HomeBackgroundVideo extends Component<any, State> {
           frameBorder="0"
           uk-responsive="true"
           uk-video="automute: true"
-          // @ts-ignore
-          style={styles.video}
+          style={{
+            width: "100%",
+            height: "100vh",
+            backgroundColor: "#000000",
+            position: "fixed",
+            objectFit: browser === "chrome" ? "contain" : "inherit",
+            // @ts-ignore
+            align: "center"
+          }}
         />
         <div
           style={{
@@ -47,7 +58,8 @@ export default class HomeBackgroundVideo extends Component<any, State> {
             top: 0,
             width: "100%",
             height,
-            backgroundColor: "#000000"
+            backgroundColor: "#000000",
+            zIndex: 10
           }}
         />
         <div
@@ -63,14 +75,3 @@ export default class HomeBackgroundVideo extends Component<any, State> {
     );
   }
 }
-
-const styles = {
-  video: {
-    width: "100%",
-    height: "100vh",
-    backgroundColor: "#000000",
-    position: "fixed",
-    objectFit: "contain",
-    align: "center"
-  }
-};
