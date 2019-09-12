@@ -26,7 +26,7 @@ class WorksPage extends Component<Props, State> {
     const allWork: Array<Work> = state.allWork.filter(work => !!work.id);
     this.state = {
       allWork,
-      hideMoreButton: allWork.length === 0,
+      hideMoreButton: allWork.length !== 5,
       loadingMoreWork: false
     };
     window.scrollTo(0, 0);
@@ -37,7 +37,7 @@ class WorksPage extends Component<Props, State> {
 
   _getRecentWork = async () => {
     try {
-      const recentWork = await Work.getRecent(1);
+      const recentWork = await Work.getRecent();
       this.setState({
         allWork: recentWork,
         hideMoreButton: recentWork.length !== 5
