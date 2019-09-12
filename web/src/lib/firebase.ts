@@ -13,9 +13,11 @@ const config = {
 
 const app = firebase.initializeApp(config);
 
+firebase.firestore().enablePersistence();
+
 export default app;
 export const provider = new firebase.auth.GoogleAuthProvider();
-export async function validateUserPermissions() {
+export const validateUserPermissions = async (): Promise<boolean> => {
   const user = app.auth().currentUser;
   if (user) {
     try {
@@ -37,4 +39,5 @@ export async function validateUserPermissions() {
       return false;
     }
   }
+  return false;
 }
