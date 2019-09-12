@@ -75,6 +75,17 @@ export default class Work {
     let data = doc.data() as WorkSnapshot;
     return new Work(id, data);
   }
+  static async getDocById(id: string): Promise<firebase.firestore.DocumentSnapshot> {
+    const doc = await firebase
+      .firestore()
+      .collection("work")
+      .doc(id)
+      .get();
+    if (!doc.exists) {
+      throw new Error("Work does not exist!");
+    }
+    return doc;
+  }
   static async getRecent(limit: number = 5): Promise<Array<Work>> {
     let work: Array<Work> = [];
     let query = await firebase
@@ -82,6 +93,28 @@ export default class Work {
       .collection("work")
       .orderBy("date", "desc")
       .limit(limit)
+      .get();
+    query.docs.forEach(doc => {
+      work.push(
+        new Work(doc.id, {
+          title: doc.data().title || "",
+          description: doc.data().description || "",
+          url: doc.data().url || "",
+          date: doc.data().date || -1,
+          backgroundImage: doc.data().backgroundImage || ""
+        })
+      );
+    });
+    return work;
+  }
+  static async getAfter(doc: firebase.firestore.DocumentSnapshot, limit: number = 5): Promise<Array<Work>> {
+    let work: Array<Work> = [];
+    let query = await firebase
+      .firestore()
+      .collection("work")
+      .orderBy("date", "desc")
+      .limit(limit)
+      .startAfter(doc)
       .get();
     query.docs.forEach(doc => {
       work.push(
