@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContentContainer renders a dark card when specified 1`] = `
+<div
+  className="uk-background-secondary"
+  id=""
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "marginLeft": "15%",
+        "marginRight": "15%",
+        "paddingBottom": "7.5vh",
+        "paddingTop": "7.5vh",
+      }
+    }
+  >
+    <div />
+  </div>
+</div>
+`;
+
+exports[`ContentContainer renders a light card by default 1`] = `
+<div
+  className="uk-background-muted"
+  id=""
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "marginLeft": "15%",
+        "marginRight": "15%",
+        "paddingBottom": "7.5vh",
+        "paddingTop": "7.5vh",
+      }
+    }
+  >
+    <div />
+  </div>
+</div>
+`;
+
+exports[`ContentContainer renders a light card when specified 1`] = `
+<div
+  className="uk-background-muted"
+  id=""
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "marginLeft": "15%",
+        "marginRight": "15%",
+        "paddingBottom": "7.5vh",
+        "paddingTop": "7.5vh",
+      }
+    }
+  >
+    <div />
+  </div>
+</div>
+`;
+
+exports[`ContentContainer renders provided cardContent 1`] = `
+<div
+  className="uk-background-muted"
+  id=""
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "marginLeft": "15%",
+        "marginRight": "15%",
+        "paddingBottom": "7.5vh",
+        "paddingTop": "7.5vh",
+      }
+    }
+  >
+    <h3>
+      Content
+    </h3>
+  </div>
+</div>
+`;
+
+exports[`ContentContainer sets the parent div id to the specified id 1`] = `
+<div
+  className="uk-background-muted"
+  id="123"
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "marginLeft": "15%",
+        "marginRight": "15%",
+        "paddingBottom": "7.5vh",
+        "paddingTop": "7.5vh",
+      }
+    }
+  >
+    <div />
+  </div>
+</div>
+`;

@@ -1,9 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Card renders a dark card when specified 1`] = `"<div class=\\"uk-card uk-card-body uk-card-default\\"><p class=\\"uk-h1\\"></p><div></div></div>"`;
+exports[`Card renders a dark card when specified 1`] = `
+<div
+  className="uk-card uk-card-body uk-card-default"
+>
+  <p
+    className="uk-h1"
+  />
+  <div />
+</div>
+`;
 
-exports[`Card renders a light card by default 1`] = `"<div class=\\"uk-card uk-card-body uk-card-hover\\"><p class=\\"uk-h1\\"></p><div></div></div>"`;
+exports[`Card renders a light card by default 1`] = `
+<div
+  className="uk-card uk-card-body uk-card-hover"
+>
+  <p
+    className="uk-h1"
+  />
+  <div />
+</div>
+`;
 
-exports[`Card renders a light card when specified 1`] = `"<div class=\\"uk-card uk-card-body uk-card-hover\\"><p class=\\"uk-h1\\"></p><div></div></div>"`;
+exports[`Card renders a light card when specified 1`] = `
+<div
+  className="uk-card uk-card-body uk-card-hover"
+>
+  <p
+    className="uk-h1"
+  />
+  <div />
+</div>
+`;
 
-exports[`Card renders a provided title and content 1`] = `"<div class=\\"uk-card uk-card-body uk-card-hover\\"><p class=\\"uk-h1\\">Title</p><h3>Content</h3></div>"`;
+exports[`Card renders a provided title and content 1`] = `
+<div
+  className="uk-card uk-card-body uk-card-hover"
+>
+  <p
+    className="uk-h1"
+  >
+    Title
+  </p>
+  <h3>
+    Content
+  </h3>
+</div>
+`;
