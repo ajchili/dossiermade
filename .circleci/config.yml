@@ -37,19 +37,19 @@ jobs:
       - run: yarn test
 
       - run:
-        name: Setup Enviroment Variables
-        command: |
-          echo REACT_APP_API_KEY=$REACT_APP_API_KEY |
-          REACT_APP_AUTH_DOMAIN=$REACT_APP_AUTH_DOMAIN |
-          REACT_APP_DATABASE_URL=$REACT_APP_DATABASE_URL |
-          REACT_APP_PROJECT_ID=$REACT_APP_PROJECT_ID |
-          REACT_APP_STORAGE_BUCKET=$REACT_APP_STORAGE_BUCKET |
-          REACT_APP_MESSAGE_SENDER_ID=$REACT_APP_MESSAGE_SENDER_ID > .env.local
+          name: Setup Enviroment Variables
+          command: |
+            echo REACT_APP_API_KEY=$REACT_APP_API_KEY |
+            REACT_APP_AUTH_DOMAIN=$REACT_APP_AUTH_DOMAIN |
+            REACT_APP_DATABASE_URL=$REACT_APP_DATABASE_URL |
+            REACT_APP_PROJECT_ID=$REACT_APP_PROJECT_ID |
+            REACT_APP_STORAGE_BUCKET=$REACT_APP_STORAGE_BUCKET |
+            REACT_APP_MESSAGE_SENDER_ID=$REACT_APP_MESSAGE_SENDER_ID > .env.local
       
       - run:
-        name: Build
-        command: yarn build
+          name: Build
+          command: yarn build
 
       - run:
-        name: Deploy to Production
-        command: firebase deploy --only hosting --token "$FIREBASE_TOKEN" -m "$CIRCLE_USERNAME:$CIRCLE_SHA1"
+          name: Deploy to Production
+          command: firebase deploy --only hosting --token "$FIREBASE_TOKEN" -m "$CIRCLE_USERNAME:$CIRCLE_SHA1"
