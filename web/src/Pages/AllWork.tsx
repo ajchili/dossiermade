@@ -10,22 +10,69 @@ interface Props extends RouteComponentProps {}
 
 interface State {
   allWork: Array<Work>;
+  hideMoreButton: boolean;
+  loadingMoreWork: boolean;
 }
 
 class WorksPage extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    let state: { allWork: Array<Work> } = props.location.state || {
-      eallWork: []
+    const state: { allWork: Array<Work> } = props.location.state || {
+      allWork: []
     };
+    // Get all objects that have the property id. This is done to ensure that
+    // provided objects are of type Work. Provided objects are not of type
+    // Work when a refresh occurs.
+    const allWork: Array<Work> = state.allWork.filter(work => !!work.id);
     this.state = {
-      allWork: state.allWork
+      allWork,
+      hideMoreButton: allWork.length === 0,
+      loadingMoreWork: false
     };
     window.scrollTo(0, 0);
+    if (allWork.length === 0) {
+      this._getRecentWork();
+    }
+  }
+
+  _getRecentWork = async () => {
+    try {
+      const recentWork = await Work.getRecent(1);
+      this.setState({
+        allWork: recentWork,
+        hideMoreButton: recentWork.length !== 5
+      });
+    } catch (err) {
+      // TODO: Handle error
+    }
+  }
+
+  _getMoreWork = async () => {
+    const { allWork } = this.state;
+    if (allWork.length > 0) {
+      this.setState({
+        loadingMoreWork: true
+      });
+      try {
+        const lastWorkId: string = allWork[allWork.length - 1].id;
+        const lastWorkDoc = await Work.getDocById(lastWorkId);
+        const olderWork = await Work.getAfter(lastWorkDoc);
+        this.setState({
+          allWork: allWork.concat(olderWork),
+          hideMoreButton: olderWork.length !== 5,
+        });
+      } catch (err) {
+        // TODO: Handle error
+      } finally {
+        this.setState({
+          loadingMoreWork: false
+        });
+      }
+    }
   }
 
   render() {
-    const { allWork } = this.state;
+    const { allWork, hideMoreButton, loadingMoreWork } = this.state;
     return (
       <div>
         <ContentContainer
@@ -35,7 +82,21 @@ class WorksPage extends Component<Props, State> {
             <WorkCard
               backgroundColor="dark"
               bottomContent={
-                <button className="uk-button uk-button-secondary">More</button>
+                <div>
+                  <button
+                    className="uk-button uk-button-secondary"
+                    hidden={loadingMoreWork || hideMoreButton}
+                    onClick={this._getMoreWork}
+                  >
+                    More
+                  </button>
+                  <div
+                    className="uk-text-center uk-dark"
+                    hidden={!loadingMoreWork}
+                  >
+                    <div uk-spinner="ratio: 1" />
+                  </div>
+                </div>
               }
               work={allWork || []}
               page={"other"}
