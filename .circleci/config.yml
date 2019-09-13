@@ -49,4 +49,4 @@ jobs:
 
       - run:
           name: Deploy to Production
-          command: yarn deploy -- --token "$FIREBASE_TOKEN" -m "$CIRCLE_USERNAME:$CIRCLE_SHA1"
+          command: yarn deploy --token "$FIREBASE_TOKEN" -m "$CIRCLE_USERNAME:$CIRCLE_SHA1"
