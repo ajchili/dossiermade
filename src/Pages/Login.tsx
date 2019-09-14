@@ -46,6 +46,7 @@ class Login extends Component<Props, State> {
           }
         } catch (err) {
           // Ignore error
+          console.error(err);
         }
       })
       .catch(() => alert("An unexpected error occurred."));
