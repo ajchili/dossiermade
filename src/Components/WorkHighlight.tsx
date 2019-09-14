@@ -39,8 +39,7 @@ export default class WorkHighlight extends Component<Props> {
 const styles = {
   iframe: {
     width: "100%",
-    height: "50vh",
-    minHeight: 300,
-    maxHeight: 600
+    height: "65vh",
+    minHeight: 300
   }
 };
