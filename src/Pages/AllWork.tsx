@@ -26,7 +26,7 @@ class WorksPage extends Component<Props, State> {
     const allWork: Array<Work> = state.allWork.filter(work => !!work.id);
     this.state = {
       allWork,
-      hideMoreButton: allWork.length !== 5,
+      hideMoreButton: false,
       loadingMoreWork: false
     };
     window.scrollTo(0, 0);

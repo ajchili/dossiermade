@@ -10,7 +10,31 @@ interface Props {
   page: "home" | "other";
 }
 
-class WorkCard extends Component<Props> {
+interface State {
+  titleFlexDirection: "column" | "row"
+}
+
+class WorkCard extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      titleFlexDirection: window.innerWidth < 400 ? "column" : "row"
+    };
+  }
+
+  componentDidMount() {
+    this._updateWindowDimensions();
+    window.addEventListener('resize', this._updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._updateWindowDimensions);
+  }
+
+  _updateWindowDimensions = () => {
+    this.setState({ titleFlexDirection: window.innerWidth < 600 ? "column" : "row" });
+  }
+
   render() {
     const {
       backgroundColor = "light",
@@ -18,6 +42,7 @@ class WorkCard extends Component<Props> {
       work: allWork,
       page
     } = this.props;
+    const { titleFlexDirection } = this.state;
     return (
       <Card
         title="OUR WORK"
@@ -41,16 +66,27 @@ class WorkCard extends Component<Props> {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    backgroundImage: `url(${work.backgroundImage})`
+                    backgroundImage: `url(${work.backgroundImage})`,
+                    minHeight: "65vh"
                   }}
                 >
-                  <div className="uk-light uk-background-secondary">
-                    <div className="uk-padding">
-                      <p className="uk-h2">{work.title}</p>
-                      <p>{work.description}</p>
+                  <div
+                    className="uk-background-secondary"
+                    style={{
+                      bottom: 0,
+                      display: "flex",
+                      flexDirection: titleFlexDirection,
+                      left: 0,
+                      position: "absolute",
+                      right: 0
+                    }}
+                  >
+                    <div
+                      className="uk-light uk-margin-left"
+                      style={{ flex: 2 }}
+                    >
+                      <span className="uk-h2 uk-text-uppercase">{work.title}</span>
                     </div>
-                  </div>
-                  <div className="uk-text-center uk-margin-top">
                     <Link
                       to={{
                         pathname: `/work/${work.id}`,

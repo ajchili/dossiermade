@@ -27,7 +27,7 @@ class Home extends Component<any, State> {
 
   async componentDidMount() {
     try {
-      let work = await Work.getRecent();
+      let work = await Work.getRecent(3);
       this.setState({ work });
     } catch (err) {
       // Ignore error
