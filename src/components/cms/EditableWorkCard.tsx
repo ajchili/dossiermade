@@ -16,6 +16,7 @@ interface State {
   url: string;
   date: Date;
   backgroundImage: string;
+  showVideo: boolean;
 }
 
 export default class EditableWorkCard extends Component<Props, State> {
@@ -26,23 +27,26 @@ export default class EditableWorkCard extends Component<Props, State> {
       description: props.work.description || "",
       url: props.work.url || "",
       date: props.work.date ? new Date(props.work.date) : new Date(),
-      backgroundImage: props.work.backgroundImage || ""
+      backgroundImage: props.work.backgroundImage || "",
+      showVideo: false
     };
   }
 
   _getTitleLengthError = (): JSX.Element | null => {
     const { title } = this.state;
     if (title.length > 30) {
-      return <span className="uk-text-small uk-text-danger">
-        Title is too long!
-      </span>;
+      return (
+        <span className="uk-text-small uk-text-danger">Title is too long!</span>
+      );
     } else if (title.length >= 25) {
-      return <span className="uk-text-small uk-text-warning">
-        Title is becoming too long!
-      </span>;
+      return (
+        <span className="uk-text-small uk-text-warning">
+          Title is becoming too long!
+        </span>
+      );
     }
     return null;
-  }
+  };
 
   render() {
     const {
@@ -53,61 +57,57 @@ export default class EditableWorkCard extends Component<Props, State> {
       onCancelEditing = () => console.log("Cancel edit action missing!"),
       onSave = () => console.log("Save action missing!")
     } = this.props;
+    const { showVideo } = this.state;
 
     return (
-      <div className="uk-card uk-card-body uk-card-default uk-margin-top uk-margin-left uk-margin-right">
+      <div className="uk-card uk-card-body uk-card-default">
         {!isEditing ? (
-          <div
-            style={{
-              display: "flex"
-            }}
-          >
-            <div style={{ flex: 2, padding: 10 }}>
-              <iframe
-                title="video"
-                src={work.url.replace("watch?v=", "embed/")}
-                width="100%"
-                height="100%"
-              />
-            </div>
+          <div style={{ display: "flex" }}>
             <div style={{ flex: 1, padding: 10 }}>
               <div style={{ display: "flex", flexDirection: "column" }}>
+                {showVideo && (
+                  <iframe
+                    title="video"
+                    src={work.url.replace("watch?v=", "embed/")}
+                    width="100%"
+                    height={275}
+                  />
+                )}
                 <img
                   src={work.backgroundImage}
                   alt={work.backgroundImage}
                   height={275}
+                  hidden={showVideo}
                   style={{
                     flex: 2,
                     maxHeight: 275
                   }}
                 />
-                <div
-                  style={{
-                    maxHeight: 200,
-                    overflowY: "scroll",
-                    flex: 2
-                  }}
-                >
-                  <p className="uk-h1">{work.title}</p>
-                  <p className="uk-h4">
-                    {work.description}
-                    <br />
+                <div style={{ flex: 2 }}>
+                  <span className="uk-h2">{work.title}</span>
+                  <br />
+                  <span className="uk-h4">
                     {new Date(work.date).toLocaleDateString()}
-                    <br />
-                  </p>
+                  </span>
                 </div>
-                <div className="uk-margin-top" style={{ float: "right" }}>
+                <div className="uk-margin-top uk-button-group">
                   <button
-                    className="uk-button uk-button-danger uk-margin-right"
-                    onClick={onDelete}
-                  >
-                    Delete
-                  </button>
-                  <button
-                    className="uk-button uk-button-secondary"
+                    className="uk-button uk-button-secondary uk-button-small"
                     onClick={onEdit}
                   >
                     Edit
+                  </button>
+                  <button
+                    className="uk-button uk-button-secondary uk-button-small"
+                    onClick={() => this.setState({ showVideo: !showVideo })}
+                  >
+                    {showVideo ? "Hide" : "Show"} Video
+                  </button>
+                  <button
+                    className="uk-button uk-button-danger uk-button-small"
+                    onClick={onDelete}
+                  >
+                    Delete
                   </button>
                 </div>
               </div>
@@ -123,13 +123,6 @@ export default class EditableWorkCard extends Component<Props, State> {
               onChange={e => this.setState({ title: e.target.value })}
             />
             {this._getTitleLengthError()}
-            <input
-              className="uk-input uk-margin-top"
-              type="text"
-              placeholder="Description"
-              defaultValue={work.description}
-              onChange={e => this.setState({ description: e.target.value })}
-            />
             <input
               className="uk-input uk-margin-top"
               type="date"
