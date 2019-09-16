@@ -5,6 +5,7 @@ import ContactCard from "../components/ContactCard";
 import WorkCard from "../components/WorkCard";
 import Person from "../lib/Person";
 import Work from "../lib/Work";
+import WorkStore from "../store/WorkStore";
 
 interface Props extends RouteComponentProps {}
 
@@ -17,13 +18,7 @@ interface State {
 class WorksPage extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    const state: { allWork: Array<Work> } = props.location.state || {
-      allWork: []
-    };
-    // Get all objects that have the property id. This is done to ensure that
-    // provided objects are of type Work. Provided objects are not of type
-    // Work when a refresh occurs.
-    const allWork: Array<Work> = state.allWork.filter(work => !!work.id);
+    const allWork = WorkStore.instance().work;
     this.state = {
       allWork,
       hideMoreButton: false,
@@ -37,7 +32,7 @@ class WorksPage extends Component<Props, State> {
 
   _getRecentWork = async () => {
     try {
-      const recentWork = await Work.getRecent();
+      const recentWork = await WorkStore.instance().getRecent(5);
       this.setState({
         allWork: recentWork,
         hideMoreButton: recentWork.length !== 5
@@ -55,10 +50,9 @@ class WorksPage extends Component<Props, State> {
       });
       try {
         const lastWorkId: string = allWork[allWork.length - 1].id;
-        const lastWorkDoc = await Work.getDocById(lastWorkId);
-        const olderWork = await Work.getAfter(lastWorkDoc);
+        const olderWork = await WorkStore.instance().getAfter(lastWorkId);
         this.setState({
-          allWork: allWork.concat(olderWork),
+          allWork: WorkStore.instance().work,
           hideMoreButton: olderWork.length !== 5,
         });
       } catch (err) {

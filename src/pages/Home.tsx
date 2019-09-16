@@ -8,6 +8,7 @@ import ServicesCard from "../components/ServicesCard";
 import WorkCard from "../components/WorkCard";
 import Person from "../lib/Person";
 import Work from "../lib/Work";
+import WorkStore from "../store/WorkStore";
 
 interface State {
   showVideo: boolean;
@@ -27,7 +28,7 @@ class Home extends Component<any, State> {
 
   async componentDidMount() {
     try {
-      let work = await Work.getRecent(3);
+      let work = await WorkStore.instance().getRecent(3);
       this.setState({ work });
     } catch (err) {
       // Ignore error
@@ -52,12 +53,7 @@ class Home extends Component<any, State> {
         <Navbar />
         <ContentContainer
           id="work"
-          cardContent={
-            <WorkCard
-              work={work}
-              page="home"
-            />
-          }
+          cardContent={<WorkCard work={work} page="home" />}
         />
         <ContentContainer id="about" cardContent={<AboutCard />} />
         <ContentContainer id="services" cardContent={<ServicesCard />} />

@@ -88,10 +88,7 @@ class WorkCard extends Component<Props, State> {
                       <span className="uk-h2 uk-text-uppercase">{work.title}</span>
                     </div>
                     <Link
-                      to={{
-                        pathname: `/work/${work.id}`,
-                        state: { work }
-                      }}
+                      to={`/work/${work.id}`}
                       className="uk-button uk-button-secondary"
                     >
                       View
@@ -103,7 +100,7 @@ class WorkCard extends Component<Props, State> {
             <div className="uk-text-center uk-margin-top">
               {page === "home" && (
                 <Link
-                  to={{ pathname: "/work", state: { allWork } }}
+                  to={"/work"}
                   className="uk-button uk-button-secondary"
                 >
                   View All

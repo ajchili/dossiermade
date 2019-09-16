@@ -6,6 +6,7 @@ import WorkCard from "../components/WorkCard";
 import WorkHighlight from "../components/WorkHighlight";
 import Person from "../lib/Person";
 import Work from "../lib/Work";
+import WorkStore from "../store/WorkStore";
 
 interface Props extends RouteComponentProps {}
 
@@ -45,7 +46,7 @@ class WorkPage extends Component<Props, State> {
   _loadSingleWork = async (id: string) => {
     const { history } = this.props;
     try {
-      let work = await Work.getById(id);
+      let work = await WorkStore.instance().getById(id);
       this.setState({ work });
     } catch (err) {
       if (err.message === "Work does not exist!") {
