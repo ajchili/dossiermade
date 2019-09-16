@@ -98,7 +98,7 @@ class WorkPage extends Component<Props, State> {
           Add
         </button>
         <div
-          className="uk-padding uk-child-width-1-3"
+          className="uk-padding uk-child-width-1-2@s uk-child-width-1-3@m"
           uk-grid={"masonry: true"}
         >
           {work.map((work: Work) => (
