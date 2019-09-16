@@ -30,6 +30,20 @@ export default class EditableWorkCard extends Component<Props, State> {
     };
   }
 
+  _getTitleLengthError = (): JSX.Element | null => {
+    const { title } = this.state;
+    if (title.length > 30) {
+      return <span className="uk-text-small uk-text-danger">
+        Title is too long!
+      </span>;
+    } else if (title.length >= 25) {
+      return <span className="uk-text-small uk-text-warning">
+        Title is becoming too long!
+      </span>;
+    }
+    return null;
+  }
+
   render() {
     const {
       work,
@@ -108,6 +122,7 @@ export default class EditableWorkCard extends Component<Props, State> {
               defaultValue={work.title}
               onChange={e => this.setState({ title: e.target.value })}
             />
+            {this._getTitleLengthError()}
             <input
               className="uk-input uk-margin-top"
               type="text"
