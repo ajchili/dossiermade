@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import ContentContainer from "../Components/ContentContainer";
-import ContactCard from "../Components/ContactCard";
-import WorkCard from "../Components/WorkCard";
-import WorkHighlight from "../Components/WorkHighlight";
+import ContentContainer from "../components/ContentContainer";
+import ContactCard from "../components/ContactCard";
+import WorkCard from "../components/WorkCard";
+import WorkHighlight from "../components/WorkHighlight";
 import Person from "../lib/Person";
 import Work from "../lib/Work";
 

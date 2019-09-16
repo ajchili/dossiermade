@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import Lander from "../Components/HomeLander";
-import Navbar from "../Components/HomeNavbar";
-import AboutCard from "../Components/AboutCard";
-import ContactCard from "../Components/ContactCard";
-import ContentContainer from "../Components/ContentContainer";
-import ServicesCard from "../Components/ServicesCard";
-import WorkCard from "../Components/WorkCard";
+import Lander from "../components/HomeLander";
+import Navbar from "../components/HomeNavbar";
+import AboutCard from "../components/AboutCard";
+import ContactCard from "../components/ContactCard";
+import ContentContainer from "../components/ContentContainer";
+import ServicesCard from "../components/ServicesCard";
+import WorkCard from "../components/WorkCard";
 import Person from "../lib/Person";
 import Work from "../lib/Work";
 
