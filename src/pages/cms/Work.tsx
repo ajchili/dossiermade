@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import Navbar from "../../components/AdminDashboardNavbar";
-import EditableWorkCard from "../../components/EditableWorkCard";
+import Navbar from "../../components/cms/Navbar";
+import EditableWorkCard from "../../components/cms/EditableWorkCard";
 import Work, { WorkSnapshot } from "../../lib/Work";
 
 interface Props extends RouteComponentProps {}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Work, { WorkSnapshot } from "../lib/Work";
+import Work, { WorkSnapshot } from "../../lib/Work";
 
 export interface Props {
   work: Work;

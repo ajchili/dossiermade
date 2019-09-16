@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import firebase, { validateUserPermissions } from "../../lib/firebase";
 import Card from "../../components/Card";
-import Navbar from "../../components/AdminDashboardNavbar";
+import Navbar from "../../components/cms/Navbar";
 
 export interface Props extends RouteComponentProps {}
 

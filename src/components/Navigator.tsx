@@ -9,9 +9,9 @@ import AllWork from "../pages/AllWork";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Work from "../pages/Work";
-import AdminDashboard from "../pages/Admin/Home";
-import AdminContactInformation from "../pages/Admin/ContactInformation";
-import AdminWork from "../pages/Admin/Work";
+import AdminDashboard from "../pages/cms/Home";
+import AdminContactInformation from "../pages/cms/ContactInformation";
+import AdminWork from "../pages/cms/Work";
 import firebase from "../lib/firebase";
 
 interface State {

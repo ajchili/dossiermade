@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Person from "../lib/Person";
+import Person from "../../lib/Person";
 
 export interface Props {
   person: Person;

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
-import firebase from "../lib/firebase";
+import firebase from "../../lib/firebase";
 
 interface Props extends RouteComponentProps {}
 
-class AdminDashboardNavbar extends Component<Props, {}> {
+class Navbar extends Component<Props, {}> {
   _logout = () => {
     firebase.auth().signOut();
   };
@@ -33,4 +33,4 @@ class AdminDashboardNavbar extends Component<Props, {}> {
   }
 }
 
-export default withRouter(AdminDashboardNavbar);
+export default withRouter(Navbar);
