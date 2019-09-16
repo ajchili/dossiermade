@@ -67,6 +67,12 @@ class WorkPage extends Component<Props, State> {
     try {
       let workToDelete = work.find(work => work.id === id);
       if (workToDelete) {
+        const shouldDelete = window.confirm(
+          `Are you certain that you want to delete "${workToDelete.title}"?`
+        );
+        if (!shouldDelete) {
+          return;
+        }
         await workToDelete.delete();
         this.setState({
           work: work.filter(work => work.id !== id),
@@ -91,28 +97,36 @@ class WorkPage extends Component<Props, State> {
         >
           Add
         </button>
-        {work.map((work: Work) => (
-          <EditableWorkCard
-            key={work.id}
-            work={work}
-            isEditing={workBeingEdited.includes(work.id)}
-            onEdit={() => {
-              if (!workBeingEdited.includes(work.id)) {
-                workBeingEdited.push(work.id);
-                this.setState({ workBeingEdited });
-              }
-            }}
-            onCancelEditing={() => {
-              if (workBeingEdited.includes(work.id)) {
-                this.setState({
-                  workBeingEdited: workBeingEdited.filter(id => id !== work.id)
-                });
-              }
-            }}
-            onDelete={() => this._deleteWork(work.id)}
-            onSave={(data: WorkSnapshot) => this._updateWork(work.id, data)}
-          />
-        ))}
+        <div
+          className="uk-padding uk-child-width-1-3"
+          uk-grid={"masonry: true"}
+        >
+          {work.map((work: Work) => (
+            <div key={work.id}>
+              <EditableWorkCard
+                work={work}
+                isEditing={workBeingEdited.includes(work.id)}
+                onEdit={() => {
+                  if (!workBeingEdited.includes(work.id)) {
+                    workBeingEdited.push(work.id);
+                    this.setState({ workBeingEdited });
+                  }
+                }}
+                onCancelEditing={() => {
+                  if (workBeingEdited.includes(work.id)) {
+                    this.setState({
+                      workBeingEdited: workBeingEdited.filter(
+                        id => id !== work.id
+                      )
+                    });
+                  }
+                }}
+                onDelete={() => this._deleteWork(work.id)}
+                onSave={(data: WorkSnapshot) => this._updateWork(work.id, data)}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
