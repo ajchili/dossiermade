@@ -5,13 +5,13 @@ import {
   Route,
   Switch
 } from "react-router-dom";
-import AllWork from "../Pages/AllWork";
-import Home from "../Pages/Home";
-import Login from "../Pages/Login";
-import Work from "../Pages/Work";
-import AdminDashboard from "../Pages/Admin/Home";
-import AdminContactInformation from "../Pages/Admin/ContactInformation";
-import AdminWork from "../Pages/Admin/Work";
+import AllWork from "../pages/AllWork";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Work from "../pages/Work";
+import AdminDashboard from "../pages/Admin/Home";
+import AdminContactInformation from "../pages/Admin/ContactInformation";
+import AdminWork from "../pages/Admin/Work";
 import firebase from "../lib/firebase";
 
 interface State {
