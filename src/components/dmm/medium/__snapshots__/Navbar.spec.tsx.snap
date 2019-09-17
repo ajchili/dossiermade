@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Medium Navbar renders links if any are provided 1`] = `
+<nav
+  className="uk-navbar-container uk-navbar-secondary uk-light"
+  uk-navbar="true"
+>
+  <div
+    className="uk-navbar-left uk-width-1-1 uk-background-secondary"
+  >
+    <a
+      className="uk-navbar-item uk-logo"
+      href="#lander"
+      uk-scroll="true"
+    >
+      DOSSIER MADE MEDIA
+    </a>
+    <ul
+      className="uk-navbar-nav"
+      uk-scrollspy-nav="closest: li; scroll: true"
+    >
+      <li
+        key="0"
+      >
+        <a
+          href="#test"
+          uk-scroll="true"
+        >
+          TEST
+        </a>
+      </li>
+      <li
+        key="1"
+      >
+        <a
+          href="#testing"
+          uk-scroll="true"
+        >
+          TESTING
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+`;
+
+exports[`Medium Navbar renders no links if none are provided 1`] = `
+<nav
+  className="uk-navbar-container uk-navbar-secondary uk-light"
+  uk-navbar="true"
+>
+  <div
+    className="uk-navbar-left uk-width-1-1 uk-background-secondary"
+  >
+    <a
+      className="uk-navbar-item uk-logo"
+      href="#lander"
+      uk-scroll="true"
+    >
+      DOSSIER MADE MEDIA
+    </a>
+    <ul
+      className="uk-navbar-nav"
+      uk-scrollspy-nav="closest: li; scroll: true"
+    />
+  </div>
+</nav>
+`;

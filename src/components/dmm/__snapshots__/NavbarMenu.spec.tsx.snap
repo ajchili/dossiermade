@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavbarMenu renders links if any are provided 1`] = `
+<div
+  id="menu"
+  uk-offcanvas="true"
+>
+  <div
+    className="uk-offcanvas-bar"
+  >
+    <button
+      className="uk-offcanvas-close"
+      type="button"
+      uk-close="true"
+    />
+    <ul
+      className="uk-nav"
+    >
+      <li>
+        <a
+          className="uk-navbar-toggle"
+          href="#lander"
+          uk-scroll="true"
+          uk-toggle="target: #menu"
+        >
+          HOME
+        </a>
+      </li>
+      <li
+        key="0"
+      >
+        <a
+          className="uk-navbar-toggle"
+          href="#test"
+          uk-scroll="true"
+          uk-toggle="target: #menu"
+        >
+          TEST
+        </a>
+      </li>
+      <li
+        key="1"
+      >
+        <a
+          className="uk-navbar-toggle"
+          href="#testing"
+          uk-scroll="true"
+          uk-toggle="target: #menu"
+        >
+          TESTING
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`NavbarMenu renders no links if none are provided 1`] = `
+<div
+  id="menu"
+  uk-offcanvas="true"
+>
+  <div
+    className="uk-offcanvas-bar"
+  >
+    <button
+      className="uk-offcanvas-close"
+      type="button"
+      uk-close="true"
+    />
+    <ul
+      className="uk-nav"
+    >
+      <li>
+        <a
+          className="uk-navbar-toggle"
+          href="#lander"
+          uk-scroll="true"
+          uk-toggle="target: #menu"
+        >
+          HOME
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
