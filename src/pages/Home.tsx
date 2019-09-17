@@ -51,10 +51,7 @@ class Home extends Component<any, State> {
       <div>
         <Lander id="lander" showVideo={showVideo} />
         <Navbar />
-        <ContentContainer
-          id="work"
-          cardContent={<WorkCard work={work} page="home" />}
-        />
+        <ContentContainer id="work" cardContent={<WorkCard work={work} />} />
         <ContentContainer id="about" cardContent={<AboutCard />} />
         <ContentContainer id="services" cardContent={<ServicesCard />} />
         <ContentContainer

@@ -19,7 +19,7 @@ interface State {
 class WorkPage extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    const state: { work?: Work; } = props.location.state || { work: undefined };
+    const state: { work?: Work } = props.location.state || { work: undefined };
     const params: { id?: string } = props.match.params;
     const type = !!params.id ? "single" : "all";
     this.state = {
@@ -48,11 +48,11 @@ class WorkPage extends Component<Props, State> {
   };
 
   render() {
-    const { type, work, allWork } = this.state;
+    const { type, work, allWork = [] } = this.state;
     return (
       <div>
         {type === "single" && <WorkHighlight work={work} />}
-        {type === "all" && !!allWork && (
+        {type === "all" && (
           <ContentContainer
             id="content"
             backgroundColor="dark"
@@ -64,14 +64,13 @@ class WorkPage extends Component<Props, State> {
                     More
                   </button>
                 }
-                work={allWork || []}
-                page={"other"}
+                work={allWork}
               />
             }
           />
         )}
         <ContentContainer
-          id="content"
+          id="contact"
           backgroundColor="dark"
           cardContent={<ContactCard people={Person.getStaticPeople()} />}
         />

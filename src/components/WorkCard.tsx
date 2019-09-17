@@ -6,7 +6,6 @@ interface Props {
   backgroundColor?: "light" | "dark";
   bottomContent?: ReactElement;
   work: Array<Work>;
-  page: "home" | "other";
 }
 
 interface State {
@@ -47,48 +46,77 @@ class WorkCard extends Component<Props, State> {
     const {
       backgroundColor = "light",
       bottomContent,
-      work: allWork,
-      page
+      work: allWork
     } = this.props;
     const { titleFlexDirection } = this.state;
+    const isSmallScreen = window.innerWidth < 800;
+
     return (
       <div>
         {!allWork.length && (
-          <div className="uk-text-center uk-dark">
+          <div
+            className={`uk-text-center uk-${
+              backgroundColor === "light" ? "dark" : "light"
+            }`}
+          >
             <div uk-spinner="ratio: 1" />
           </div>
         )}
         <div
           className="uk-child-width-1-2@s uk-child-width-1-1@m"
-          uk-grid={"masonry: true"}
+          uk-grid={isSmallScreen ? "masonry: true" : "true"}
         >
           {allWork.map((work: Work) => (
             <div key={work.id}>
               <div
-                className="uk-card uk-card-body uk-card-hover"
-                style={{
-                  backgroundAttachment: "fixed",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                  backgroundImage: `url(${work.backgroundImage})`,
-                  minHeight: "65vh"
-                }}
+                className={isSmallScreen ? "" : "uk-card uk-card-body"}
+                style={
+                  isSmallScreen
+                    ? {}
+                    : {
+                        backgroundAttachment: "fixed",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundImage: `url(${work.backgroundImage})`,
+                        minHeight: "65vh"
+                      }
+                }
               >
+                {isSmallScreen && (
+                  <img
+                    src={work.backgroundImage}
+                    alt=""
+                    style={{
+                      height: "auto",
+                      width: "100%",
+                      bottom: 0,
+                      left: 0,
+                      right: 0
+                    }}
+                  />
+                )}
                 <div
                   className={
                     backgroundColor === "light"
                       ? "uk-background-secondary"
                       : "uk-background-default"
                   }
-                  style={{
-                    bottom: 0,
-                    display: "flex",
-                    flexDirection: titleFlexDirection,
-                    left: 0,
-                    position: "absolute",
-                    right: 0
-                  }}
+                  style={
+                    isSmallScreen
+                      ? {
+                          display: "flex",
+                          flexDirection: titleFlexDirection
+                        }
+                      : {
+                          bottom: 0,
+                          display: "flex",
+                          flexDirection: titleFlexDirection,
+                          left: 0,
+                          position: "absolute",
+                          right: 0
+                        }
+                  }
                 >
                   <div
                     className={`${
@@ -105,7 +133,7 @@ class WorkCard extends Component<Props, State> {
                     className={`uk-button ${
                       backgroundColor === "light"
                         ? "uk-button-secondary"
-                        : "uk-button-light"
+                        : "uk-button-default"
                     }`}
                   >
                     View
@@ -116,12 +144,13 @@ class WorkCard extends Component<Props, State> {
           ))}
         </div>
         <div className="uk-text-center uk-margin-top">
-          {page === "home" && (
+          {bottomContent !== undefined ? (
+            bottomContent
+          ) : (
             <Link to={"/work"} className="uk-button uk-button-secondary">
               View All
             </Link>
           )}
-          {page === "other" && bottomContent}
         </div>
       </div>
     );

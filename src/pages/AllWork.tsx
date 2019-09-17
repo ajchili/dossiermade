@@ -66,7 +66,7 @@ class WorksPage extends Component<Props, State> {
   }
 
   render() {
-    const { allWork, hideMoreButton, loadingMoreWork } = this.state;
+    const { allWork = [], hideMoreButton, loadingMoreWork } = this.state;
     return (
       <div>
         <ContentContainer
@@ -92,8 +92,7 @@ class WorksPage extends Component<Props, State> {
                   </div>
                 </div>
               }
-              work={allWork || []}
-              page={"other"}
+              work={allWork}
             />
           }
         />
