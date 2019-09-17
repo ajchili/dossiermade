@@ -1,7 +1,7 @@
 import React, { Component, ReactElement } from "react";
 import { Link } from "react-router-dom";
 import Spinner from "../Spinner";
-import Normal from "./normal/WorkShowcase";
+import Medium from "./medium/WorkShowcase";
 import Small from "./small/WorkShowcase";
 import Work from "../../lib/Work";
 
@@ -26,7 +26,7 @@ export default class extends Component<Props> {
           />
         </div>
         <div className="uk-visible@m">
-          <Normal
+          <Medium
             backgroundColor={backgroundColor}
             bottomContent={bottomContent}
             work={work}
