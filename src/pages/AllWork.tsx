@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import ContentContainer from "../components/ContentContainer";
 import ContactCard from "../components/ContactCard";
-import WorkCard from "../components/WorkCard";
+import Spinner from "../components/Spinner";
+import WorkShowcaseContainer from "../components/dmm/WorkShowcaseContainer";
 import Person from "../lib/Person";
 import Work from "../lib/Work";
 import WorkStore from "../store/WorkStore";
@@ -73,7 +74,7 @@ class WorksPage extends Component<Props, State> {
           id="content"
           backgroundColor="dark"
           cardContent={
-            <WorkCard
+            <WorkShowcaseContainer
               backgroundColor="dark"
               bottomContent={
                 <div>
@@ -84,12 +85,7 @@ class WorksPage extends Component<Props, State> {
                   >
                     More
                   </button>
-                  <div
-                    className="uk-text-center uk-dark"
-                    hidden={!loadingMoreWork}
-                  >
-                    <div uk-spinner="ratio: 1" />
-                  </div>
+                  {loadingMoreWork && <Spinner backgroundColor="dark" />}
                 </div>
               }
               work={allWork}

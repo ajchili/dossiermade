@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import ContentContainer from "../components/ContentContainer";
 import ContactCard from "../components/ContactCard";
-import WorkCard from "../components/WorkCard";
 import WorkHighlight from "../components/WorkHighlight";
+import WorkShowcaseContainer from "../components/dmm/WorkShowcaseContainer";
 import Person from "../lib/Person";
 import Work from "../lib/Work";
 import WorkStore from "../store/WorkStore";
@@ -57,7 +57,7 @@ class WorkPage extends Component<Props, State> {
             id="content"
             backgroundColor="dark"
             cardContent={
-              <WorkCard
+              <WorkShowcaseContainer
                 backgroundColor="dark"
                 bottomContent={
                   <button className="uk-button uk-button-secondary">

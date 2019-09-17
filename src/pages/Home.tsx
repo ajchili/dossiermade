@@ -5,10 +5,10 @@ import AboutCard from "../components/AboutCard";
 import ContactCard from "../components/ContactCard";
 import ContentContainer from "../components/ContentContainer";
 import ServicesCard from "../components/ServicesCard";
-import WorkCard from "../components/WorkCard";
 import Person from "../lib/Person";
 import Work from "../lib/Work";
 import WorkStore from "../store/WorkStore";
+import WorkShowcaseContainer from "../components/dmm/WorkShowcaseContainer";
 
 interface State {
   showVideo: boolean;
@@ -51,7 +51,10 @@ class Home extends Component<any, State> {
       <div>
         <Lander id="lander" showVideo={showVideo} />
         <Navbar />
-        <ContentContainer id="work" cardContent={<WorkCard work={work} />} />
+        <ContentContainer
+          id="work"
+          cardContent={<WorkShowcaseContainer work={work} />}
+        />
         <ContentContainer id="about" cardContent={<AboutCard />} />
         <ContentContainer id="services" cardContent={<ServicesCard />} />
         <ContentContainer
