@@ -58,8 +58,7 @@ export default class HomeBackgroundVideo extends Component<any, State> {
             top: 0,
             width: "100%",
             height,
-            backgroundColor: "#000000",
-            zIndex: 10
+            backgroundColor: "#000000"
           }}
         />
         <div
