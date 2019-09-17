@@ -19,26 +19,16 @@ interface State {
 class WorkPage extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    let state: { work?: Work; allWork?: Array<Work> } = props.location
-      .state || { work: undefined, allWork: undefined };
-    let params: { id?: string } = props.match.params;
-    if (state.work !== undefined && !state.work.title) {
-      state.work = undefined;
-    }
-    if (
-      state.allWork !== undefined &&
-      (!state.allWork.length || !state.allWork[0].title)
-    ) {
-      state.allWork = undefined;
-    }
+    const state: { work?: Work; } = props.location.state || { work: undefined };
+    const params: { id?: string } = props.match.params;
+    const type = !!params.id ? "single" : "all";
     this.state = {
-      type: params.id ? "single" : "all",
+      type,
       work: state.work,
-      allWork: state.allWork
+      allWork: WorkStore.instance().work
     };
-    if (params.id) {
-      this._loadSingleWork(params.id);
-    } else if (state.allWork === undefined) {
+    if (type === "single") {
+      this._loadSingleWork(params.id!);
     }
     window.scrollTo(0, 0);
   }
