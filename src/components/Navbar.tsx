@@ -7,7 +7,7 @@ const links = [
   { name: "CONTACT", url: "contact" }
 ];
 
-export default class HomeNavbar extends Component {
+export default class Navbar extends Component {
   render() {
     return (
       <div>
@@ -51,7 +51,6 @@ export default class HomeNavbar extends Component {
               <a
                 className="uk-navbar-toggle"
                 uk-toggle="target: #menu"
-                uk-navbar-toggle-icon="true"
                 href="#menu"
               >
                 <span uk-navbar-toggle-icon="true" />

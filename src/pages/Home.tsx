@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Lander from "../components/HomeLander";
-import Navbar from "../components/HomeNavbar";
+import Navbar from "../components/Navbar";
 import AboutCard from "../components/AboutCard";
 import ContactCard from "../components/ContactCard";
 import ContentContainer from "../components/ContentContainer";
