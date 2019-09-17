@@ -1,0 +1,2 @@
+# components
+Components are split into three separate directories, root, CMS, and DMM. The root directory contains components that are used in both the CMS (Content Management System) and DMM (Dossier Made Media). Components within the CMS folder are used exclusively for the CMS. The same is assummed for DMM, all components within the DMM folder are used exclusively for DMM.
