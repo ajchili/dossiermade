@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import Navbar from "../../components/cms/Navbar";
 import EditableWorkCard from "../../components/cms/EditableWorkCard";
 import Work, { WorkSnapshot } from "../../lib/Work";
+import WorkStore from "../../store/WorkStore";
 
 interface Props extends RouteComponentProps {}
 
@@ -15,14 +16,14 @@ class WorkPage extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      work: [],
+      work: WorkStore.instance().work,
       workBeingEdited: []
     };
   }
 
   async componentDidMount() {
     try {
-      let work = await Work.getAll();
+      const work = await WorkStore.instance().getAll();
       this.setState({ work });
     } catch (err) {
       console.error(err);
@@ -30,13 +31,12 @@ class WorkPage extends Component<Props, State> {
   }
 
   _createWork = async () => {
-    const { work, workBeingEdited } = this.state;
+    const { workBeingEdited } = this.state;
     try {
-      let newWork = await Work.create({ date: new Date().getTime() });
-      work.unshift(newWork);
-      workBeingEdited.push(newWork.id);
+      const newWorkId = await WorkStore.instance().create({ date: new Date().getTime() });
+      workBeingEdited.push(newWorkId);
       this.setState({
-        work,
+        work: WorkStore.instance().work,
         workBeingEdited
       });
     } catch (err) {
@@ -45,18 +45,13 @@ class WorkPage extends Component<Props, State> {
   };
 
   _updateWork = async (id: string, data: WorkSnapshot) => {
-    const { work, workBeingEdited } = this.state;
+    const { workBeingEdited } = this.state;
     try {
-      let workToBeUpdated = work.find(work => work.id === id);
-      if (workToBeUpdated) {
-        await workToBeUpdated.update(data);
-        this.setState({
-          work,
-          workBeingEdited: workBeingEdited.filter(_id => _id !== id)
-        });
-      } else {
-        throw new Error("Specified work does not exist!");
-      }
+      await WorkStore.instance().update(id, data);
+      this.setState({
+        work: WorkStore.instance().work,
+        workBeingEdited: workBeingEdited.filter(_id => _id !== id)
+      });
     } catch (err) {
       console.error(err);
     }
@@ -65,7 +60,7 @@ class WorkPage extends Component<Props, State> {
   _deleteWork = async (id: string) => {
     const { work, workBeingEdited } = this.state;
     try {
-      let workToDelete = work.find(work => work.id === id);
+      const workToDelete = work.find(work => work.id === id);
       if (workToDelete) {
         const shouldDelete = window.confirm(
           `Are you certain that you want to delete "${workToDelete.title}"?`
@@ -73,9 +68,9 @@ class WorkPage extends Component<Props, State> {
         if (!shouldDelete) {
           return;
         }
-        await workToDelete.delete();
+        await WorkStore.instance().delete(id);
         this.setState({
-          work: work.filter(work => work.id !== id),
+          work: WorkStore.instance().work,
           workBeingEdited: workBeingEdited.filter(_id => _id !== id)
         });
       } else {

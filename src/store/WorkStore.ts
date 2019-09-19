@@ -1,5 +1,5 @@
 import firebase from "../lib/firebase";
-import Work from "../lib/Work";
+import Work, { WorkSnapshot } from "../lib/Work";
 
 export default class WorkStore {
   private _docs: Map<string, firebase.firestore.DocumentSnapshot> = new Map();
@@ -11,6 +11,16 @@ export default class WorkStore {
   }
   static instance(): WorkStore {
     return this._instance;
+  }
+  async create(data: WorkSnapshot): Promise<string> {
+    const newWork = await Work.create(data);
+    this._work.unshift(newWork);
+    return newWork.id;
+  }
+  async delete(id: string): Promise<void> {
+    const work = await this.getById(id);
+    await work.delete();
+    this._work = this._work.filter(w => w.id !== id);
   }
   async getAll(): Promise<Array<Work>> {
     this._work = await Work.getAll();
@@ -46,6 +56,10 @@ export default class WorkStore {
     const additionalWork = await Work.getAfter(doc, limit);
     additionalWork.forEach(work => this._work.push(work));
     return additionalWork;
+  }
+  async update(id: string, data: WorkSnapshot): Promise<void> {
+    const work = await this.getById(id);
+    await work.update(data);
   }
   private async getDocumentReferenceById(
     id: string
