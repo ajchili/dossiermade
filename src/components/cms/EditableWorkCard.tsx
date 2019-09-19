@@ -144,15 +144,9 @@ export default class EditableWorkCard extends Component<Props, State> {
               defaultValue={work.backgroundImage}
               onChange={e => this.setState({ backgroundImage: e.target.value })}
             />
-            <div className="uk-margin-top" style={{ float: "right" }}>
+            <div className="uk-margin-top uk-button-group">
               <button
-                className="uk-button uk-button-danger uk-margin-right"
-                onClick={onCancelEditing}
-              >
-                Cancel
-              </button>
-              <button
-                className="uk-button uk-button-secondary"
+                className="uk-button uk-button-secondary uk-button-small"
                 onClick={() =>
                   onSave({
                     title: this.state.title,
@@ -165,7 +159,22 @@ export default class EditableWorkCard extends Component<Props, State> {
               >
                 Save
               </button>
+              <button
+                className="uk-button uk-button-danger uk-button-small"
+                onClick={onCancelEditing}
+              >
+                Cancel
+              </button>
             </div>
+          </div>
+        )}
+        {!work.shouldDisplayPublicly && (
+          <div className="uk-alert-warning" uk-alert="true">
+            <span>
+              This work will not be displayed publicly. In order for this work
+              to be displayed, it must have a <strong>title</strong>,{" "}
+              <strong>URL</strong>, and a <strong>Background Image URL</strong>!
+            </span>
           </div>
         )}
       </div>
