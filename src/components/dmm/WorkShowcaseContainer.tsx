@@ -15,6 +15,8 @@ export default class extends Component<Props> {
   render() {
     const { backgroundColor = "light", bottomContent, work = [] } = this.props;
 
+    const visibleWork = work.filter(work => work.shouldDisplayPublicly);
+
     return (
       <div>
         {!work.length && <Spinner backgroundColor={backgroundColor} />}
@@ -22,14 +24,14 @@ export default class extends Component<Props> {
           <Small
             backgroundColor={backgroundColor}
             bottomContent={bottomContent}
-            work={work}
+            work={visibleWork}
           />
         </div>
         <div className="uk-visible@m">
           <Medium
             backgroundColor={backgroundColor}
             bottomContent={bottomContent}
-            work={work}
+            work={visibleWork}
           />
         </div>
         <div className="uk-text-center uk-margin-top">

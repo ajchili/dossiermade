@@ -36,6 +36,11 @@ export default class Work {
   get embeddedURL() {
     return (this._data.url || "").replace("watch?v=", "embed/");
   }
+  get shouldDisplayPublicly(): boolean {
+    return this.title.length > 0
+      && this.embeddedURL.length > 0
+      && this.backgroundImage.length > 0;
+  }
   static async create(data: WorkSnapshot) {
     let doc = await firebase
       .firestore()
