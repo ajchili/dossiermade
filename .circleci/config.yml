@@ -63,6 +63,34 @@ jobs:
       - run:
           name: Deploy to Production
           command: yarn deploy --token "$FIREBASE_TOKEN" -m "$CIRCLE_USERNAME:$CIRCLE_SHA1"
+  deploy-staging:
+    docker:
+      - image: circleci/node:10.16
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Setup Enviroment Variables
+          command: (
+            echo REACT_APP_API_KEY=$REACT_APP_API_KEY
+            echo REACT_APP_AUTH_DOMAIN=$REACT_APP_AUTH_DOMAIN
+            echo REACT_APP_DATABASE_URL=$REACT_APP_DATABASE_URL
+            echo REACT_APP_PROJECT_ID=$REACT_APP_PROJECT_ID
+            echo REACT_APP_STORAGE_BUCKET=$REACT_APP_STORAGE_BUCKET
+            echo REACT_APP_MESSAGE_SENDER_ID=$REACT_APP_MESSAGE_SENDER_ID
+            ) > .env.local
+      - run:
+          name: Deploy to Staging
+          command: yarn deploy-staging --token "$FIREBASE_TOKEN" -m "$CIRCLE_USERNAME:$CIRCLE_SHA1"
 workflows:
   version: 2
   build_test_and_deploy:
@@ -77,3 +105,9 @@ workflows:
           filters:
             branches:
               only: master
+      - deploy-staging:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: master
