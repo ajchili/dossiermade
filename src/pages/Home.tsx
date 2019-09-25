@@ -6,7 +6,7 @@ import ContactCard from "../components/ContactCard";
 import ContentContainer from "../components/ContentContainer";
 import ServicesCard from "../components/ServicesCard";
 import Person from "../lib/Person";
-import Work from "../lib/Work";
+import { Work } from "../lib/firebase";
 import WorkStore from "../store/WorkStore";
 import WorkShowcaseContainer from "../components/dmm/WorkShowcaseContainer";
 

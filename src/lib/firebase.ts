@@ -50,8 +50,26 @@ export interface Work {
   url: string;
 }
 
+export const getAllWork = async (): Promise<Array<Work>> => {
+  const data: any = await firebase.functions().httpsCallable("getAllWork")({});
+  const work = data as Array<Work>;
+  return work;
+}
+
 export const getRecentWork = async (limit: number = 5): Promise<Array<Work>> => {
   const data: any = await firebase.functions().httpsCallable("getRecentWork")({ limit });
   const work = data as Array<Work>;
+  return work;
+}
+
+export const getWorkAfterId = async (id: string, limit: number = 5): Promise<Array<Work>> => {
+  const data: any = await firebase.functions().httpsCallable("getWorkAfterId")({ id, limit });
+  const work = data as Array<Work>;
+  return work;
+}
+
+export const getWorkById = async (id: string): Promise<Work> => {
+  const data: any = await firebase.functions().httpsCallable("getWorkById")({ id });
+  const work = data as Work;
   return work;
 }
