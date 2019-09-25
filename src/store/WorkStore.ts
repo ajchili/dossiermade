@@ -46,13 +46,13 @@ export default class WorkStore {
     } else if (this._work.length < limit) {
       const last = this._work[this._work.length - 1];
       const newLimit = limit - this._work.length;
-      const additionalWork = await this.getAfter(last.id, newLimit);
-      additionalWork.forEach(work => this._work.push(work));
+      await this.getAfter(last.id, newLimit);
     }
     return this._work.slice(0, limit);
   }
   async getAfter(id: string, limit: number = 5): Promise<Array<Work>> {
-    const additionalWork = await getWorkAfterId(id, limit)
+    const additionalWork = await getWorkAfterId(id, limit);
+    additionalWork.forEach(work => this._work.push(work));
     return additionalWork;
   }
   async update(updatedWork: Work): Promise<void> {
