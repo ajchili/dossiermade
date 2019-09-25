@@ -42,11 +42,16 @@ const shouldShowWork = (work: Work): boolean => {
   return work.title.length > 0 && work.url.length > 0 && work.backgroundImage.length > 0;
 }
 
+const isUidAdmin = async (uid: string): Promise<boolean> => {
+  const doc = await admin.firestore().collection("users").doc(uid).get();
+  return doc.exists && (doc.data() || {}).admin === true;
+}
+
 exports.getAllWork = functions.https.onCall(async (_: any, context: functions.https.CallableContext) => {
-  const { uid = null } = context.auth || {};
+  const { uid = "" } = context.auth || {};
   const query = await admin.firestore().collection("work").orderBy("date", "desc").get();
   let work = getWorkFromDocs(query.docs);
-  if (!uid) {
+  if (uid.length > 0 && await isUidAdmin(uid)) {
     work = work.filter(shouldShowWork);
   }
   return work;
@@ -54,10 +59,10 @@ exports.getAllWork = functions.https.onCall(async (_: any, context: functions.ht
 
 exports.getRecentWork = functions.https.onCall(async (data: any, context: functions.https.CallableContext) => {
   const { limit = 5 } = data;
-  const { uid = null } = context.auth || {};
+  const { uid = "" } = context.auth || {};
   const query = await admin.firestore().collection("work").orderBy("date", "desc").limit(limit * 2).get();
   let work = getWorkFromDocs(query.docs);
-  if (!uid) {
+  if (uid.length > 0 && await isUidAdmin(uid)) {
     work = work.filter(shouldShowWork);
   }
   return work.slice(0, limit);
@@ -65,7 +70,7 @@ exports.getRecentWork = functions.https.onCall(async (data: any, context: functi
 
 exports.getWorkAfterId = functions.https.onCall(async (data: any, context: functions.https.CallableContext) => {
   const { id = null, limit = 5 } = data;
-  const { uid = null } = context.auth || {};
+  const { uid = "" } = context.auth || {};
   if (id) {
     const doc = await admin.firestore().collection("work").doc(id).get();
     if (doc.exists) {
@@ -77,7 +82,7 @@ exports.getWorkAfterId = functions.https.onCall(async (data: any, context: funct
         .startAfter(doc)
         .get();
       let work = getWorkFromDocs(query.docs);
-      if (!uid) {
+      if (uid.length > 0 && await isUidAdmin(uid)) {
         work = work.filter(shouldShowWork);
       }
       return work.slice(0, limit);
