@@ -56,19 +56,18 @@ export default class WorkStore {
     return additionalWork;
   }
   async update(updatedWork: Work): Promise<void> {
-    let work = await this.getById(updatedWork.id);
     const {
       backgroundImage = "",
       date = -1,
       title = "",
       url = ""
-    } = work;
+    } = updatedWork;
     await firebase.firestore().collection("work").doc(updatedWork.id).update({
       backgroundImage,
       date,
       title,
       url
     });
-    work = updatedWork;
+    await this.getAll();
   }
 }
