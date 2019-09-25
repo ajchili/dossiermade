@@ -166,7 +166,7 @@ export default class EditableWorkCard extends Component<Props, State> {
               </div>
             </div>
           )}
-        {work.title.length > 0 && work.url.length > 0 && work.backgroundImage.length > 0 && (
+        {!(work.title.length > 0 && work.url.length > 0 && work.backgroundImage.length > 0) && (
           <div className="uk-alert-warning" uk-alert="true">
             <span>
               This work will not be displayed publicly. In order for this work
