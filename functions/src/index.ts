@@ -42,7 +42,7 @@ const shouldShowWork = (work: Work): boolean => {
   return work.title.length > 0 && work.url.length > 0 && work.backgroundImage.length > 0;
 }
 
-exports.getAllWork = functions.https.onCall(async (data: any, context: functions.https.CallableContext) => {
+exports.getAllWork = functions.https.onCall(async (_: any, context: functions.https.CallableContext) => {
   const { uid = null } = context.auth || {};
   const query = await admin.firestore().collection("work").orderBy("date", "desc").get();
   let work = getWorkFromDocs(query.docs);
@@ -63,7 +63,33 @@ exports.getRecentWork = functions.https.onCall(async (data: any, context: functi
   return work.slice(0, limit);
 });
 
-exports.getWorkById = functions.https.onCall(async (data: any, context: functions.https.CallableContext) => {
+exports.getWorkAfterId = functions.https.onCall(async (data: any, context: functions.https.CallableContext) => {
+  const { id = null, limit = 5 } = data;
+  const { uid = null } = context.auth || {};
+  if (id) {
+    const doc = await admin.firestore().collection("work").doc(id).get();
+    if (doc.exists) {
+      const query = await admin
+        .firestore()
+        .collection("work")
+        .orderBy("date", "desc")
+        .limit(limit * 2)
+        .startAfter(doc)
+        .get();
+      let work = getWorkFromDocs(query.docs);
+      if (!uid) {
+        work = work.filter(shouldShowWork);
+      }
+      return work.slice(0, limit);
+    } else {
+      throw new Error("Specified work does not exist!");
+    }
+  } else {
+    throw new Error("No id provided, unable to find work!");
+  }
+})
+
+exports.getWorkById = functions.https.onCall(async (data: any, _: functions.https.CallableContext) => {
   const { id = null } = data;
   if (id) {
     const doc = await admin.firestore().collection("work").doc(id).get();
