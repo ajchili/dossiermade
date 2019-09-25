@@ -51,7 +51,7 @@ exports.getAllWork = functions.https.onCall(async (_: any, context: functions.ht
   const { uid = "" } = context.auth || {};
   const query = await admin.firestore().collection("work").orderBy("date", "desc").get();
   let work = getWorkFromDocs(query.docs);
-  if (uid.length > 0 && await isUidAdmin(uid)) {
+  if (uid.length > 0 && !(await isUidAdmin(uid))) {
     work = work.filter(shouldShowWork);
   }
   return work;
@@ -62,16 +62,16 @@ exports.getRecentWork = functions.https.onCall(async (data: any, context: functi
   const { uid = "" } = context.auth || {};
   const query = await admin.firestore().collection("work").orderBy("date", "desc").limit(limit * 2).get();
   let work = getWorkFromDocs(query.docs);
-  if (uid.length > 0 && await isUidAdmin(uid)) {
+  if (uid.length > 0 && !(await isUidAdmin(uid))) {
     work = work.filter(shouldShowWork);
   }
   return work.slice(0, limit);
 });
 
 exports.getWorkAfterId = functions.https.onCall(async (data: any, context: functions.https.CallableContext) => {
-  const { id = null, limit = 5 } = data;
+  const { id = "", limit = 5 } = data;
   const { uid = "" } = context.auth || {};
-  if (id) {
+  if (id.length > 0) {
     const doc = await admin.firestore().collection("work").doc(id).get();
     if (doc.exists) {
       const query = await admin
@@ -82,7 +82,7 @@ exports.getWorkAfterId = functions.https.onCall(async (data: any, context: funct
         .startAfter(doc)
         .get();
       let work = getWorkFromDocs(query.docs);
-      if (uid.length > 0 && await isUidAdmin(uid)) {
+      if (uid.length > 0 && !(await isUidAdmin(uid))) {
         work = work.filter(shouldShowWork);
       }
       return work.slice(0, limit);
