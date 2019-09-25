@@ -41,3 +41,17 @@ export const validateUserPermissions = async (): Promise<boolean> => {
   }
   return false;
 }
+
+export interface Work {
+  backgroundImage: string;
+  date: number;
+  id: string;
+  title: string;
+  url: string;
+}
+
+export const getRecentWork = async (limit: number = 5): Promise<Array<Work>> => {
+  const data: any = await firebase.functions().httpsCallable("getRecentWork")({ limit });
+  const work = data as Array<Work>;
+  return work;
+}

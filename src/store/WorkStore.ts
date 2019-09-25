@@ -1,25 +1,26 @@
-import firebase from "../lib/firebase";
-import Work, { WorkSnapshot } from "../lib/Work";
+import firebase, { Work, getRecentWork } from "../lib/firebase";
 
 export default class WorkStore {
-  private _docs: Map<string, firebase.firestore.DocumentSnapshot> = new Map();
   private _work: Array<Work> = [];
   private static _instance: WorkStore = new WorkStore();
-  private constructor() {}
+  private constructor() { }
   get work(): Array<Work> {
     return this._work;
   }
   static instance(): WorkStore {
     return this._instance;
   }
-  async create(data: WorkSnapshot): Promise<string> {
-    const newWork = await Work.create(data);
-    this._work.unshift(newWork);
-    return newWork.id;
+  async create(): Promise<string> {
+    const doc = await firebase
+      .firestore()
+      .collection("work")
+      .add({
+        date: new Date().getTime()
+      });
+    return doc.id;
   }
   async delete(id: string): Promise<void> {
-    const work = await this.getById(id);
-    await work.delete();
+    await firebase.firestore().collection("work").doc(id).delete();
     this._work = this._work.filter(w => w.id !== id);
   }
   async getAll(): Promise<Array<Work>> {
@@ -41,7 +42,7 @@ export default class WorkStore {
   }
   async getRecent(limit: number = 5): Promise<Array<Work>> {
     if (this._work.length === 0) {
-      this._work = await Work.getRecent(limit);
+      this._work = await getRecentWork(limit);
     } else if (this._work.length < limit) {
       const last = this._work[this._work.length - 1];
       const lastDoc = await this.getDocumentReferenceById(last.id);
