@@ -32,23 +32,38 @@ const getWorkFromDocs = (docs: FirebaseFirestore.QueryDocumentSnapshot[]): Array
   const work: Array<Work> = [];
   docs.forEach(doc => {
     if (doc.exists) {
-      const _work = getWorkFromDoc(doc);
-      if (_work.title.length > 0 && _work.url.length > 0 && _work.backgroundImage.length > 0) {
-        work.push(_work);
-      }
+      work.push(getWorkFromDoc(doc));
     }
   });
   return work;
 }
 
-exports.getRecentWork = functions.https.onCall(async (data: any, _: functions.https.CallableContext) => {
+const shouldShowWork = (work: Work): boolean => {
+  return work.title.length > 0 && work.url.length > 0 && work.backgroundImage.length > 0;
+}
+
+exports.getAllWork = functions.https.onCall(async (data: any, context: functions.https.CallableContext) => {
+  const { uid = null } = context.auth || {};
+  const query = await admin.firestore().collection("work").orderBy("date", "desc").get();
+  let work = getWorkFromDocs(query.docs);
+  if (!uid) {
+    work = work.filter(shouldShowWork);
+  }
+  return work;
+});
+
+exports.getRecentWork = functions.https.onCall(async (data: any, context: functions.https.CallableContext) => {
   const { limit = 5 } = data;
+  const { uid = null } = context.auth || {};
   const query = await admin.firestore().collection("work").orderBy("date", "desc").limit(limit * 2).get();
-  const work = getWorkFromDocs(query.docs);
+  let work = getWorkFromDocs(query.docs);
+  if (!uid) {
+    work = work.filter(shouldShowWork);
+  }
   return work.slice(0, limit);
 });
 
-exports.getWorkById = functions.https.onCall(async (data: any, _: functions.https.CallableContext) => {
+exports.getWorkById = functions.https.onCall(async (data: any, context: functions.https.CallableContext) => {
   const { id = null } = data;
   if (id) {
     const doc = await admin.firestore().collection("work").doc(id).get();
