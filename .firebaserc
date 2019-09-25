@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "dossier-made-media"
+  },
+  "targets": {
+    "dossier-made-media": {
+      "hosting": {
+        "production": [
+          "dossier-made-media"
+        ],
+        "staging": [
+          "staging-dossier-made-media"
+        ]
+      }
+    }
   }
 }
