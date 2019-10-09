@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Menu from "./NavbarMenu";
 import Medium from "./medium/Navbar";
 import Small from "./small/Navbar";
 
@@ -24,8 +23,7 @@ export default class extends Component {
     return (
       <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky;">
         <div className="uk-hidden@s">
-          <Small />
-          <Menu links={links} />
+          <Small links={links} />
         </div>
         <div className="uk-visible@s">
           <Medium links={links} />
