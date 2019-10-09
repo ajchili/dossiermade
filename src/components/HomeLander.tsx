@@ -9,11 +9,12 @@ interface Props {
 export default class HomeLander extends Component<Props> {
   render() {
     const { id, showVideo = false } = this.props;
+
     return (
       <div id={id} style={styles.lander}>
         {showVideo && <BackgroundVideo />}
         <div
-          className="uk-light"
+          className="uk-light invert"
           // @ts-ignore
           style={styles.landerContent}
         >
@@ -22,21 +23,40 @@ export default class HomeLander extends Component<Props> {
             style={styles.landerContentItems}
           >
             <p className="uk-h1 uk-text-center">DOSSIER MADE MEDIA</p>
-            <div className="uk-text-center">
-              <a href="#work" uk-scroll="true">
+            <div
+              style={{
+                position: "absolute",
+                left: "50%"
+              }}
+            >
+              <a
+                href="#work"
+                uk-scroll="true"
+                style={{
+                  position: "absolute",
+                  right: 15
+                }}
+              >
                 <button
-                  className="uk-button uk-button-default uk-button-large uk-margin-right"
+                  className="uk-button uk-button-default uk-button-large"
                   type="button"
                 >
-                  our work
+                  our&nbsp;work
                 </button>
               </a>
-              <a href="#contact" uk-scroll="true">
+              <a
+                href="#contact"
+                uk-scroll="true"
+                style={{
+                  position: "absolute",
+                  left: 15
+                }}
+              >
                 <button
-                  className="uk-button uk-button-default uk-button-large uk-margin-left"
+                  className="uk-button uk-button-default uk-button-large"
                   type="button"
                 >
-                  contact us
+                  contact&nbsp;us
                 </button>
               </a>
             </div>
@@ -62,7 +82,6 @@ const styles = {
   landerContentItems: {
     height: "100%",
     display: "table-cell",
-    verticalAlign: "middle",
-    mixBlendMode: "difference"
+    verticalAlign: "middle"
   }
 };
