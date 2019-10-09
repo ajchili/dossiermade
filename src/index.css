@@ -1,7 +1,19 @@
 .invert {
-  mix-blend-mode: difference
+  background: none;
+  mix-blend-mode: difference;
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.debug-center:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  border-left: 2px dotted #ff0000;
+  transform: translate(-50%);
 }
