@@ -46,7 +46,7 @@ export default class extends Component<Props> {
                   <span className="uk-h2 uk-text-uppercase">{work.title}</span>
                 </div>
                 <Link
-                  to={`/work/${work.id}`}
+                  to={`/portfolio/${work.id}`}
                   className={`uk-button ${
                     backgroundColor === "light"
                       ? "uk-button-secondary"

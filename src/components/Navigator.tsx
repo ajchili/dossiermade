@@ -44,8 +44,8 @@ class Navigator extends Component<any, State> {
       <Router>
         <Switch>
           <Route path="/login" exact component={Login} />
-          <Route path="/work" exact component={AllWork} />
-          <Route path="/work/:id" exact component={Work} />
+          <Route path="/portfolio" exact component={AllWork} />
+          <Route path="/portfolio/:id" exact component={Work} />
           {checkedAuthentication && (
             <Route
               path="/dashboard"

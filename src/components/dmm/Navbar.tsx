@@ -12,7 +12,7 @@ export interface Props {
 }
 
 const links = [
-  { name: "WORK", url: "work" },
+  { name: "PORTFOLIO", url: "portfolio" },
   { name: "ABOUT", url: "about" },
   { name: "SERVICES", url: "services" },
   { name: "CONTACT", url: "contact" }

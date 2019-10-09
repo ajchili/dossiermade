@@ -40,7 +40,7 @@ class WorkPage extends Component<Props, State> {
       this.setState({ work });
     } catch (err) {
       if (err.message === "Work does not exist!") {
-        return history.push("/work");
+        return history.push("/portfolio");
       } else {
         return history.push("/");
       }

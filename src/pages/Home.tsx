@@ -52,7 +52,7 @@ class Home extends Component<any, State> {
         <Lander id="lander" showVideo={showVideo} />
         <Navbar />
         <ContentContainer
-          id="work"
+          id="portfolio"
           cardContent={<WorkShowcaseContainer work={work} />}
         />
         <ContentContainer id="about" cardContent={<AboutCard />} />

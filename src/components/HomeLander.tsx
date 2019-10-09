@@ -30,7 +30,7 @@ export default class HomeLander extends Component<Props> {
               }}
             >
               <a
-                href="#work"
+                href="#portfolio"
                 uk-scroll="true"
                 style={{
                   position: "absolute",
@@ -41,7 +41,7 @@ export default class HomeLander extends Component<Props> {
                   className="uk-button uk-button-default uk-button-large"
                   type="button"
                 >
-                  our&nbsp;work
+                  portfolio
                 </button>
               </a>
               <a
@@ -56,7 +56,7 @@ export default class HomeLander extends Component<Props> {
                   className="uk-button uk-button-default uk-button-large"
                   type="button"
                 >
-                  contact&nbsp;us
+                  contact
                 </button>
               </a>
             </div>

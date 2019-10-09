@@ -38,7 +38,7 @@ export default class extends Component<Props> {
           {!!bottomContent ? (
             bottomContent
           ) : (
-            <Link to={"/work"} className="uk-button uk-button-secondary">
+            <Link to={"/portfolio"} className="uk-button uk-button-secondary">
               View All
             </Link>
           )}
