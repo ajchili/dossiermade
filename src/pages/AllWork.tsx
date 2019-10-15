@@ -5,7 +5,7 @@ import ContactCard from "../components/ContactCard";
 import Spinner from "../components/Spinner";
 import WorkShowcaseContainer from "../components/dmm/WorkShowcaseContainer";
 import Person from "../lib/Person";
-import Work from "../lib/Work";
+import { Work } from "../lib/firebase";
 import WorkStore from "../store/WorkStore";
 
 interface Props extends RouteComponentProps {}
