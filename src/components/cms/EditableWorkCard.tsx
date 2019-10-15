@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Work, { WorkSnapshot } from "../../lib/Work";
+import { Work } from "../../lib/firebase";
 
 export interface Props {
   work: Work;
@@ -7,12 +7,11 @@ export interface Props {
   onDelete?: () => void;
   onEdit?: () => void;
   onCancelEditing?: () => void;
-  onSave?: (data: WorkSnapshot) => void;
+  onSave?: (updatedWork: Work) => void;
 }
 
 interface State {
   title: string;
-  description: string;
   url: string;
   date: Date;
   backgroundImage: string;
@@ -24,7 +23,6 @@ export default class EditableWorkCard extends Component<Props, State> {
     super(props);
     this.state = {
       title: props.work.title || "",
-      description: props.work.description || "",
       url: props.work.url || "",
       date: props.work.date ? new Date(props.work.date) : new Date(),
       backgroundImage: props.work.backgroundImage || "",
@@ -114,61 +112,61 @@ export default class EditableWorkCard extends Component<Props, State> {
             </div>
           </div>
         ) : (
-          <div>
-            <input
-              className="uk-input"
-              type="text"
-              placeholder="Title"
-              defaultValue={work.title}
-              onChange={e => this.setState({ title: e.target.value })}
-            />
-            {this._getTitleLengthError()}
-            <input
-              className="uk-input uk-margin-top"
-              type="date"
-              placeholder="Date"
-              defaultValue={new Date(work.date).toISOString().slice(0, 10)}
-              onChange={e => this.setState({ date: new Date(e.target.value) })}
-            />
-            <input
-              className="uk-input uk-margin-top"
-              type="text"
-              placeholder="URL"
-              defaultValue={work.url}
-              onChange={e => this.setState({ url: e.target.value })}
-            />
-            <input
-              className="uk-input uk-margin-top"
-              type="text"
-              placeholder="Background Image URL"
-              defaultValue={work.backgroundImage}
-              onChange={e => this.setState({ backgroundImage: e.target.value })}
-            />
-            <div className="uk-margin-top uk-button-group">
-              <button
-                className="uk-button uk-button-secondary uk-button-small"
-                onClick={() =>
-                  onSave({
-                    title: this.state.title,
-                    description: this.state.description,
-                    url: this.state.url,
-                    date: this.state.date.getTime(),
-                    backgroundImage: this.state.backgroundImage
-                  })
-                }
-              >
-                Save
+            <div>
+              <input
+                className="uk-input"
+                type="text"
+                placeholder="Title"
+                defaultValue={work.title}
+                onChange={e => this.setState({ title: e.target.value })}
+              />
+              {this._getTitleLengthError()}
+              <input
+                className="uk-input uk-margin-top"
+                type="date"
+                placeholder="Date"
+                defaultValue={new Date(work.date).toISOString().slice(0, 10)}
+                onChange={e => this.setState({ date: new Date(e.target.value) })}
+              />
+              <input
+                className="uk-input uk-margin-top"
+                type="text"
+                placeholder="URL"
+                defaultValue={work.url}
+                onChange={e => this.setState({ url: e.target.value })}
+              />
+              <input
+                className="uk-input uk-margin-top"
+                type="text"
+                placeholder="Background Image URL"
+                defaultValue={work.backgroundImage}
+                onChange={e => this.setState({ backgroundImage: e.target.value })}
+              />
+              <div className="uk-margin-top uk-button-group">
+                <button
+                  className="uk-button uk-button-secondary uk-button-small"
+                  onClick={() =>
+                    onSave({
+                      id: work.id,
+                      title: this.state.title,
+                      url: this.state.url,
+                      date: this.state.date.getTime(),
+                      backgroundImage: this.state.backgroundImage
+                    })
+                  }
+                >
+                  Save
               </button>
-              <button
-                className="uk-button uk-button-danger uk-button-small"
-                onClick={onCancelEditing}
-              >
-                Cancel
+                <button
+                  className="uk-button uk-button-danger uk-button-small"
+                  onClick={onCancelEditing}
+                >
+                  Cancel
               </button>
+              </div>
             </div>
-          </div>
-        )}
-        {!work.shouldDisplayPublicly && (
+          )}
+        {!(work.title.length > 0 && work.url.length > 0 && work.backgroundImage.length > 0) && (
           <div className="uk-alert-warning" uk-alert="true">
             <span>
               This work will not be displayed publicly. In order for this work

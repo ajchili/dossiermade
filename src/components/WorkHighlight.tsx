@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from "./Card";
 import ContentContainer from "./ContentContainer";
-import Work from "../lib/Work";
+import { Work } from "../lib/firebase";
 
 export interface Props {
   work?: Work;
@@ -22,7 +22,7 @@ export default class WorkHighlight extends Component<Props> {
                 {work && (
                   <iframe
                     title="video"
-                    src={work.embeddedURL}
+                    src={work.url.replace("watch?v=", "embed/")}
                     style={styles.iframe}
                   />
                 )}

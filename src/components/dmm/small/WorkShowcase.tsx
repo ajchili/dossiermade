@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Props } from "../WorkShowcaseContainer";
-import Work from "../../../lib/Work";
+import { Work } from "../../../lib/firebase";
 
 export default class extends Component<Props> {
   render() {

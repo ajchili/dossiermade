@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/functions";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -40,4 +41,36 @@ export const validateUserPermissions = async (): Promise<boolean> => {
     }
   }
   return false;
+}
+
+export interface Work {
+  backgroundImage: string;
+  date: number;
+  id: string;
+  title: string;
+  url: string;
+}
+
+export const getAllWork = async (): Promise<Array<Work>> => {
+  const response: any = await firebase.functions().httpsCallable("getAllWork")({});
+  const work = response.data as Array<Work>;
+  return work;
+}
+
+export const getRecentWork = async (limit: number = 5): Promise<Array<Work>> => {
+  const response: any = await firebase.functions().httpsCallable("getRecentWork")({ limit });
+  const work = response.data as Array<Work>;
+  return work;
+}
+
+export const getWorkAfterId = async (id: string, limit: number = 5): Promise<Array<Work>> => {
+  const response: any = await firebase.functions().httpsCallable("getWorkAfterId")({ id, limit });
+  const work = response.data as Array<Work>;
+  return work;
+}
+
+export const getWorkById = async (id: string): Promise<Work> => {
+  const response: any = await firebase.functions().httpsCallable("getWorkById")({ id });
+  const work = response.data as Work;
+  return work;
 }
