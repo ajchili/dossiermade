@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Spinner from "../Spinner";
 import Medium from "./medium/WorkShowcase";
 import Small from "./small/WorkShowcase";
-import Work from "../../lib/Work";
+import { Work } from "../../lib/firebase";
 
 export interface Props {
   backgroundColor?: "light" | "dark";
@@ -15,7 +15,7 @@ export default class extends Component<Props> {
   render() {
     const { backgroundColor = "light", bottomContent, work = [] } = this.props;
 
-    const visibleWork = work.filter(work => work.shouldDisplayPublicly);
+    const visibleWork = work.filter(work => work.title.length > 0 && work.url.length > 0 && work.backgroundImage.length > 0);
 
     return (
       <div>
@@ -38,10 +38,10 @@ export default class extends Component<Props> {
           {!!bottomContent ? (
             bottomContent
           ) : (
-            <Link to={"/work"} className="uk-button uk-button-secondary">
-              View All
+              <Link to={"/work"} className="uk-button uk-button-secondary">
+                View All
             </Link>
-          )}
+            )}
         </div>
       </div>
     );

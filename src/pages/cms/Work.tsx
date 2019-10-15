@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import Navbar from "../../components/cms/Navbar";
 import EditableWorkCard from "../../components/cms/EditableWorkCard";
-import Work, { WorkSnapshot } from "../../lib/Work";
+import { Work } from "../../lib/firebase";
 import WorkStore from "../../store/WorkStore";
 
 interface Props extends RouteComponentProps {}
@@ -33,7 +33,7 @@ class WorkPage extends Component<Props, State> {
   _createWork = async () => {
     const { workBeingEdited } = this.state;
     try {
-      const newWorkId = await WorkStore.instance().create({ date: new Date().getTime() });
+      const newWorkId = await WorkStore.instance().create();
       workBeingEdited.push(newWorkId);
       this.setState({
         work: WorkStore.instance().work,
@@ -44,13 +44,13 @@ class WorkPage extends Component<Props, State> {
     }
   };
 
-  _updateWork = async (id: string, data: WorkSnapshot) => {
+  _updateWork = async (updatedWork: Work) => {
     const { workBeingEdited } = this.state;
     try {
-      await WorkStore.instance().update(id, data);
+      await WorkStore.instance().update(updatedWork);
       this.setState({
         work: WorkStore.instance().work,
-        workBeingEdited: workBeingEdited.filter(_id => _id !== id)
+        workBeingEdited: workBeingEdited.filter(_id => _id !== updatedWork.id)
       });
     } catch (err) {
       console.error(err);
@@ -117,7 +117,7 @@ class WorkPage extends Component<Props, State> {
                   }
                 }}
                 onDelete={() => this._deleteWork(work.id)}
-                onSave={(data: WorkSnapshot) => this._updateWork(work.id, data)}
+                onSave={(updatedWork: Work) => this._updateWork(updatedWork)}
               />
             </div>
           ))}
