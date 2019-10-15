@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Props } from "../Navbar";
 
 export default class extends Component<Props> {
@@ -25,6 +26,13 @@ export default class extends Component<Props> {
                 </a>
               </li>
             ))}
+          </ul>
+        </div>
+        <div className="uk-navbar-right uk-background-secondary">
+          <ul className="uk-navbar-nav">
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
           </ul>
         </div>
       </nav>

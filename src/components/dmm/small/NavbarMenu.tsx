@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Props } from "./Navbar";
+import { Link } from "react-router-dom";
+import { Props } from "../Navbar";
 
 export default class extends Component<Props> {
   render() {
@@ -36,6 +37,14 @@ export default class extends Component<Props> {
                 </a>
               </li>
             ))}
+            <li className="uk-hidden@s">
+              <Link
+                to="/login"
+                className="uk-navbar-toggle"
+              >
+                LOGIN
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
