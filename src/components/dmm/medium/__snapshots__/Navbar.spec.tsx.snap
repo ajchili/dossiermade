@@ -41,6 +41,21 @@ exports[`Medium Navbar renders links if any are provided 1`] = `
       </li>
     </ul>
   </div>
+  <div
+    className="uk-navbar-right uk-background-secondary"
+  >
+    <ul
+      className="uk-navbar-nav"
+    >
+      <li>
+        <Link
+          to="/login"
+        >
+          Login
+        </Link>
+      </li>
+    </ul>
+  </div>
 </nav>
 `;
 
@@ -63,6 +78,21 @@ exports[`Medium Navbar renders no links if none are provided 1`] = `
       className="uk-navbar-nav"
       uk-scrollspy-nav="closest: li; scroll: true"
     />
+  </div>
+  <div
+    className="uk-navbar-right uk-background-secondary"
+  >
+    <ul
+      className="uk-navbar-nav"
+    >
+      <li>
+        <Link
+          to="/login"
+        >
+          Login
+        </Link>
+      </li>
+    </ul>
   </div>
 </nav>
 `;

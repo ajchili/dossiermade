@@ -1,6 +1,6 @@
 import * as React from "react";
 import NavbarMenu from "./NavbarMenu";
-import { Link } from "./Navbar";
+import { Link } from "../Navbar";
 import { shallow } from "enzyme";
 
 describe("NavbarMenu", () => {

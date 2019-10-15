@@ -21,6 +21,11 @@ class Navbar extends Component<Props, {}> {
           <div className="uk-navbar-right">
             <ul className="uk-navbar-nav">
               <li>
+                <Link to="/">
+                  Home
+                </Link>
+              </li>
+              <li>
                 <a href="#logout" onClick={this._logout}>
                   Logout
                 </a>

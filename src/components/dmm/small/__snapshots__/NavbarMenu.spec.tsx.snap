@@ -50,6 +50,16 @@ exports[`NavbarMenu renders links if any are provided 1`] = `
           TESTING
         </a>
       </li>
+      <li
+        className="uk-hidden@s"
+      >
+        <Link
+          className="uk-navbar-toggle"
+          to="/login"
+        >
+          LOGIN
+        </Link>
+      </li>
     </ul>
   </div>
 </div>
@@ -80,6 +90,16 @@ exports[`NavbarMenu renders no links if none are provided 1`] = `
         >
           HOME
         </a>
+      </li>
+      <li
+        className="uk-hidden@s"
+      >
+        <Link
+          className="uk-navbar-toggle"
+          to="/login"
+        >
+          LOGIN
+        </Link>
       </li>
     </ul>
   </div>
