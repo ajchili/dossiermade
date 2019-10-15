@@ -17,6 +17,8 @@ export default class WorkStore {
       .add({
         date: new Date().getTime()
       });
+    const work = await getWorkById(doc.id);
+    this._work.unshift(work);
     return doc.id;
   }
   async delete(id: string): Promise<void> {
