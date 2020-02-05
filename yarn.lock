@@ -12409,10 +12409,10 @@ uglify-js@^3.1.4:
     commander "~2.20.3"
     source-map "~0.6.1"
 
-uikit@^3.2.3:
-  version "3.2.6"
-  resolved "https://registry.yarnpkg.com/uikit/-/uikit-3.2.6.tgz#f6133b588b6db82e5d74fb7c24d32e235caea62d"
-  integrity sha512-Z44YOo9/MjwZRDxR+3M4Z9cGXbqtpxyuyXregxtvVADZatcCKI1a76qTI6VFIIsxARvREMPpYBDGQPFd5ymWsw==
+uikit@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/uikit/-/uikit-3.3.1.tgz#342987c1d5072a04f63630429310e79cd74d7b8a"
+  integrity sha512-ddE01TPVP2rA8A/a9wkaixkhympjIOfpL//Gp0lHrjTNskBZYIazmBjW9OifJNrvp5di/1kbWVBl8fWKswAQnQ==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
