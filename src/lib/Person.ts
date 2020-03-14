@@ -43,6 +43,11 @@ export default class Person {
         name: "Kirin Patel",
         email: "info@dossiermade.com",
         phoneNumber: "(301)-641-5838"
+      }),
+      new Person("", {
+        name: "Jadon Pecoraro",
+        email: "info@dossiermade.com",
+        phoneNumber: "(443)-452-7097‬"
       })
     ];
   }
