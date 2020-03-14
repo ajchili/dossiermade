@@ -1,7 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import "firebase/functions";
 import "firebase/storage";
 
 const config = {
@@ -10,7 +9,7 @@ const config = {
   databaseURL: process.env.REACT_APP_DATABASE_URL,
   projectId: process.env.REACT_APP_PROJECT_ID,
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID
+  messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
 };
 
 const app = firebase.initializeApp(config);
@@ -42,7 +41,7 @@ export const validateUserPermissions = async (): Promise<boolean> => {
     }
   }
   return false;
-}
+};
 
 export interface Work {
   backgroundImage: string;
@@ -52,26 +51,78 @@ export interface Work {
   url: string;
 }
 
+const snapshotToWorkObject = (
+  doc:
+    | firebase.firestore.DocumentSnapshot
+    | firebase.firestore.QueryDocumentSnapshot
+): Work => {
+  const data = doc.data() || {};
+  return {
+    id: doc.id,
+    backgroundImage: data.backgroundImage || "",
+    date: data.date || 0,
+    title: data.title || "",
+    url: data.url,
+  };
+};
+
 export const getAllWork = async (): Promise<Array<Work>> => {
-  const response: any = await firebase.functions().httpsCallable("getAllWork")({});
-  const work = response.data as Array<Work>;
+  const query = await firebase
+    .firestore()
+    .collection("work")
+    .orderBy("date", "desc")
+    .get();
+  let work: Array<Work> = [];
+  query.docs.forEach((doc: firebase.firestore.QueryDocumentSnapshot) => {
+    work.push(snapshotToWorkObject(doc));
+  });
   return work;
-}
+};
 
-export const getRecentWork = async (limit: number = 5): Promise<Array<Work>> => {
-  const response: any = await firebase.functions().httpsCallable("getRecentWork")({ limit });
-  const work = response.data as Array<Work>;
+export const getRecentWork = async (
+  limit: number = 5
+): Promise<Array<Work>> => {
+  const query = await firebase
+    .firestore()
+    .collection("work")
+    .orderBy("date", "desc")
+    .limit(limit)
+    .get();
+  let work: Array<Work> = [];
+  query.docs.forEach((doc: firebase.firestore.QueryDocumentSnapshot) =>
+    work.push(snapshotToWorkObject(doc))
+  );
   return work;
-}
+};
 
-export const getWorkAfterId = async (id: string, limit: number = 5): Promise<Array<Work>> => {
-  const response: any = await firebase.functions().httpsCallable("getWorkAfterId")({ id, limit });
-  const work = response.data as Array<Work>;
+export const getWorkAfterId = async (
+  id: string,
+  limit: number = 5
+): Promise<Array<Work>> => {
+  const doc = await firebase
+    .firestore()
+    .collection("work")
+    .doc(id)
+    .get();
+  const query = await firebase
+    .firestore()
+    .collection("work")
+    .orderBy("date", "desc")
+    .startAfter(doc)
+    .limit(limit)
+    .get();
+  let work: Array<Work> = [];
+  query.docs.forEach((doc: firebase.firestore.QueryDocumentSnapshot) =>
+    work.push(snapshotToWorkObject(doc))
+  );
   return work;
-}
+};
 
 export const getWorkById = async (id: string): Promise<Work> => {
-  const response: any = await firebase.functions().httpsCallable("getWorkById")({ id });
-  const work = response.data as Work;
-  return work;
-}
+  const doc = await firebase
+    .firestore()
+    .collection("work")
+    .doc(id)
+    .get();
+  return snapshotToWorkObject(doc);
+};
