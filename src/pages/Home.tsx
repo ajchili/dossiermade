@@ -29,6 +29,8 @@ class Home extends Component<any, State> {
       this.setState({ work });
     } catch (err) {
       // Ignore error
+    } finally {
+      this.setState({ showVideo: true });
     }
   }
 
