@@ -10,7 +10,6 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Work from "../pages/Work";
 import AdminDashboard from "../pages/cms/Home";
-import AdminContactInformation from "../pages/cms/ContactInformation";
 import AdminWork from "../pages/cms/Work";
 import firebase from "../lib/firebase";
 
@@ -51,13 +50,6 @@ class Navigator extends Component<any, State> {
               path="/dashboard"
               exact
               render={() => authenticatedRoute(AdminDashboard)}
-            />
-          )}
-          {checkedAuthentication && (
-            <Route
-              path="/dashboard/contact"
-              exact
-              render={() => authenticatedRoute(AdminContactInformation)}
             />
           )}
           {checkedAuthentication && (

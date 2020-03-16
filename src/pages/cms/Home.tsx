@@ -4,7 +4,7 @@ import firebase, { validateUserPermissions } from "../../lib/firebase";
 import Card from "../../components/Card";
 import Navbar from "../../components/cms/Navbar";
 
-export interface Props extends RouteComponentProps {}
+export interface Props extends RouteComponentProps { }
 
 class Home extends Component<Props> {
   componentDidMount() {
@@ -41,25 +41,6 @@ class Home extends Component<Props> {
                   <button
                     className="uk-button uk-button-secondary"
                     onClick={() => history.push("/dashboard/work")}
-                  >
-                    Manage
-                  </button>
-                </div>
-              }
-              backgroundColor="dark"
-            />
-          </div>
-          <div className="uk-margin-top">
-            <Card
-              title="Contact Information"
-              content={
-                <div>
-                  <p>
-                    Manage contact information that is presented to visitors.
-                  </p>
-                  <button
-                    className="uk-button uk-button-secondary"
-                    onClick={() => history.push("/dashboard/contact")}
                   >
                     Manage
                   </button>

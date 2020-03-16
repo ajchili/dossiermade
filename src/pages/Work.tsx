@@ -4,11 +4,10 @@ import ContentContainer from "../components/ContentContainer";
 import ContactCard from "../components/ContactCard";
 import WorkHighlight from "../components/WorkHighlight";
 import WorkShowcaseContainer from "../components/dmm/WorkShowcaseContainer";
-import Person from "../lib/Person";
 import { Work } from "../lib/firebase";
 import WorkStore from "../store/WorkStore";
 
-interface Props extends RouteComponentProps {}
+interface Props extends RouteComponentProps { }
 
 interface State {
   type: "single" | "all";
@@ -72,7 +71,7 @@ class WorkPage extends Component<Props, State> {
         <ContentContainer
           id="contact"
           backgroundColor="dark"
-          cardContent={<ContactCard people={Person.getStaticPeople()} />}
+          cardContent={<ContactCard />}
         />
         <div style={{ position: "absolute", top: 0, left: 0 }}>
           <button

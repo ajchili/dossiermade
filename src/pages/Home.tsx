@@ -5,14 +5,12 @@ import AboutCard from "../components/AboutCard";
 import ContactCard from "../components/ContactCard";
 import ContentContainer from "../components/ContentContainer";
 import ServicesCard from "../components/ServicesCard";
-import Person from "../lib/Person";
 import { Work } from "../lib/firebase";
 import WorkStore from "../store/WorkStore";
 import WorkShowcaseContainer from "../components/dmm/WorkShowcaseContainer";
 
 interface State {
   showVideo: boolean;
-  people: Array<Person>;
   work: Array<Work>;
 }
 
@@ -21,7 +19,6 @@ class Home extends Component<any, State> {
     super(props);
     this.state = {
       showVideo: false,
-      people: Person.getStaticPeople(),
       work: []
     };
   }
@@ -32,21 +29,11 @@ class Home extends Component<any, State> {
       this.setState({ work });
     } catch (err) {
       // Ignore error
-    } finally {
-      this.setState({ showVideo: true });
-      setTimeout(async () => {
-        try {
-          let people = await Person.getAll();
-          this.setState({ people });
-        } catch (err) {
-          // Ignore error
-        }
-      }, 1500);
     }
   }
 
   render() {
-    const { showVideo, people, work } = this.state;
+    const { showVideo, work } = this.state;
     return (
       <div>
         <Lander id="lander" showVideo={showVideo} />
@@ -60,7 +47,7 @@ class Home extends Component<any, State> {
         <ContentContainer
           id="contact"
           backgroundColor="dark"
-          cardContent={<ContactCard people={people} />}
+          cardContent={<ContactCard />}
         />
       </div>
     );

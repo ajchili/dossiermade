@@ -5,7 +5,6 @@ import ContentContainer from "../components/ContentContainer";
 import ContactCard from "../components/ContactCard";
 import Spinner from "../components/Spinner";
 import WorkShowcaseContainer from "../components/dmm/WorkShowcaseContainer";
-import Person from "../lib/Person";
 import { Work } from "../lib/firebase";
 import WorkStore from "../store/WorkStore";
 
@@ -125,7 +124,7 @@ class WorksPage extends Component<Props, State> {
         <ContentContainer
           id="content"
           backgroundColor="dark"
-          cardContent={<ContactCard people={Person.getStaticPeople()} />}
+          cardContent={<ContactCard />}
         />
         <div style={{ position: "absolute", top: 0, left: 0 }}>
           <button
