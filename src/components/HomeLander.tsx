@@ -21,7 +21,7 @@ export default class HomeLander extends Component<Props> {
             // @ts-ignore
             style={styles.landerContentItems}
           >
-            <p className="uk-h1 uk-text-center">DOSSIER MADE MEDIA</p>
+            <p className="uk-h1 uk-text-center no-select">DOSSIER MADE MEDIA</p>
             <div className="uk-text-center">
               <a href="#work" uk-scroll="true">
                 <button
