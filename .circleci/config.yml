@@ -34,7 +34,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn test
+      - run: npm run test
   deploy:
     docker:
       - image: circleci/node:10.16
@@ -62,7 +62,7 @@ jobs:
             ) > .env.local
       - run:
           name: Deploy to Production
-          command: yarn deploy --token "$FIREBASE_TOKEN" -m "$CIRCLE_USERNAME:$CIRCLE_SHA1"
+          command: npm run deploy --token "$FIREBASE_TOKEN" -m "$CIRCLE_USERNAME:$CIRCLE_SHA1"
   deploy-staging:
     docker:
       - image: circleci/node:10.16
@@ -90,7 +90,7 @@ jobs:
             ) > .env.local
       - run:
           name: Deploy to Staging
-          command: yarn deploy-staging --token "$FIREBASE_TOKEN" -m "$CIRCLE_USERNAME:$CIRCLE_SHA1"
+          command: npm run deploy-staging --token "$FIREBASE_TOKEN" -m "$CIRCLE_USERNAME:$CIRCLE_SHA1"
 workflows:
   version: 2
   build_test_and_deploy:
