@@ -5,7 +5,6 @@ __All videography and photography work hosted on this website is not to be used 
 
 
 ## Development
-The dossiermade website is build with React. To get started, make sure to install [Node](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/lang/en/).
 
 1. Fork repository
 2. Create a `.env.local` file in the project directory with the following structure
@@ -19,9 +18,9 @@ The dossiermade website is build with React. To get started, make sure to instal
     REACT_APP_APP_ID=...
     ```
     _Set the values in the `.env.local` file to those obtained from a Firebase web app_
-3. Run `yarn` in the project directory
-4. Run `yarn start` in the project directory
+3. Run `npm i` in the project directory
+4. Run `npm run start` in the project directory
 5. Develop
 
 ## Deployment
-The dossiermade website has automatic deployment based on CircleCI. Any push to the master branch will result in a new deployment of the website (so long as it is build and tested successfully). Should a manual deployment be necessary, run `yarn deploy` in the project directory (_requires that `firebase-tools` is installed and that machine is authenticated with account that is attached to project in GCP/Firebase_).
+The dossiermade website has automatic deployment based on CircleCI. Any push to the master branch will result in a new deployment of the website (so long as it is build and tested successfully). Should a manual deployment be necessary, run `npm run deploy` in the project directory (_requires that `firebase-tools` is installed and that machine is authenticated with account that is attached to project in GCP/Firebase_).
